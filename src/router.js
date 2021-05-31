@@ -61,6 +61,18 @@ export default new Router({
           path: 'login',
           component: () => import('./components/base/Login'),
         },
+        // Post Category list
+        {
+          name: 'Post Category',
+          path: 'category/list',
+          component: () => import('./components/base/Category/List'),
+        },
+        // Post Category Add
+        {
+          name: 'Add Post Category',
+          path: 'category/add',
+          component: () => import('./components/base/Category/Add'),
+        },
       ],
     },
   ],

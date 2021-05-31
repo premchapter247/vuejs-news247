@@ -2,7 +2,7 @@
   <section class="mb-12 text-center">
     <h1
       class="font-weight-light mb-2 text-h5"
-      v-text="`Vuetify ${heading}`"
+      v-text="`${heading}`"
     />
 
     <span
@@ -10,7 +10,7 @@
     >
       Please checkout the
       <a
-        :href="`https://vuetifyjs.com/${link}`"
+        :href="`http://localhost:8081/${link}`"
         rel="noopener"
         target="_blank"
         class="secondary--text"
