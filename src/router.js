@@ -55,6 +55,12 @@ export default new Router({
           path: 'upgrade',
           component: () => import('@/views/dashboard/Upgrade'),
         },
+        // Login
+        {
+          name: 'Login',
+          path: 'login',
+          component: () => import('./components/base/Login'),
+        },
       ],
     },
   ],

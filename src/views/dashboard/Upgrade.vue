@@ -118,14 +118,14 @@
 </template>
 
 <script>
-  export default {
-    name: 'DashboardDashboard',
-  }
+export default {
+  name: "DashboardDashboard",
+};
 </script>
 
 <style lang="sass">
-  #upgrade
-    .v-data-table
-      th, td
-        border: none !important
+#upgrade
+  .v-data-table
+    th, td
+      border: none !important
 </style>
