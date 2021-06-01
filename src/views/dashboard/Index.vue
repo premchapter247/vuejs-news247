@@ -7,8 +7,6 @@
     <dashboard-core-view />
 
     <dashboard-core-settings />
-
-    <!-- <Login /> -->
   </v-app>
 </template>
 
@@ -21,7 +19,6 @@
       DashboardCoreDrawer: () => import('./components/core/Drawer'),
       DashboardCoreSettings: () => import('./components/core/Settings'),
       DashboardCoreView: () => import('./components/core/View'),
-      // Login: () => import('../../components/base/Login'),
     },
 
     data: () => ({

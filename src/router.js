@@ -57,9 +57,9 @@ export default new Router({
         },
         // Login
         {
-          name: 'Login',
-          path: 'login',
-          component: () => import('./components/base/Login'),
+          name: 'Post',
+          path: 'post',
+          component: () => import('./components/base/Post'),
         },
         // Post Category list
         {
