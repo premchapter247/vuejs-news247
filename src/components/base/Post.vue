@@ -126,6 +126,20 @@
                 </v-col>
               </ValidationProvider>
 
+              <ValidationProvider
+                v-slot="{ errors }"
+                name="Image"
+                rules="required|image|mimes:image/*|dimensions:100,100|size:100"
+              >
+                <v-col cols="12">
+                  <v-file-input
+                    v-model="formData.image"
+                    label="Image"
+                  />
+                  <span class="green--text">{{ errors[0] }}</span>
+                </v-col>
+              </ValidationProvider>
+
               <v-col cols="12">
                 <v-btn
                   text
