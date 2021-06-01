@@ -9,12 +9,14 @@
       title="list"
       class="px-5 py-3"
     >
-    <v-btn
-      color="secondary"
-      elevation="2"
-      to='/category/add'
-    >Add post
-    </v-btn>
+      <v-btn
+
+        color="secondary"
+        elevation="2"
+        to="/category/add"
+      >
+        Add post
+      </v-btn>
       <v-simple-table>
         <thead>
           <tr>
@@ -28,14 +30,12 @@
         </thead>
 
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Dakota Rice</td>
-          </tr>
-
-          <tr>
-            <td>2</td>
-            <td>Minverva Hooper</td>
+          <tr
+            v-for="item in list"
+            v-bind:key="item.id"
+          >
+            <td> {{ item.id }} </td>
+            <td> {{ item.title }} </td>
           </tr>
         </tbody>
       </v-simple-table>
@@ -46,7 +46,20 @@
   </v-container>
 </template>
 <script>
+
+  import axios from 'axios'
+
   export default {
     name: 'Category',
+    data () {
+      return { list: undefined }
+    },
+    mounted () {
+      axios.get('http://127.0.0.1:8000/api/category/index')
+        .then((resp) => {
+          this.list = resp.data.data
+          console.warn(resp.data.data)
+        })
+    },
   }
 </script>

@@ -67,8 +67,11 @@
         axios.post('http://127.0.0.1:8000/api/category/store',
                    { title: this.title }, { headers: { Authorization: 'Bearer' + token } },
         )
-          .then((resp) => {
-            console.warn(resp.data)
+          .then((response) => {
+            // console.warn(response.data)
+            if (response.data.status === 200) {
+              this.$router.push({ path: '/category/list' })
+            }
           })
       },
     },
