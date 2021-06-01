@@ -24,7 +24,7 @@
                   md="12"
                 >
                   <v-text-field
-                    v-model="name"
+                    v-model="title"
                     class="purple-input"
                     label="Category Name"
                   />
@@ -50,16 +50,26 @@
   </v-container>
 </template>
 <script>
+
+  import axios from 'axios'
+
   export default {
     name: 'Add',
     data () {
       return {
-        name: null,
+        title: null,
       }
     },
     methods: {
       submit () {
-        console.warn(this.name)
+        console.warn(this.title)
+        const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwM1wvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyMjQ2NTQ5OCwiZXhwIjoxNjIyNDY5MDk4LCJuYmYiOjE2MjI0NjU0OTgsImp0aSI6IjFEQWN6ekZpWUZZNUREazIiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.iD8-02M6KgBSPW3_ZR3k4CC1uZtW9nthSxtMxt48Wcw'
+        axios.post('http://127.0.0.1:8000/api/category/store',
+                   { title: this.title }, { headers: { Authorization: 'Bearer' + token } },
+        )
+          .then((resp) => {
+            console.warn(resp.data)
+          })
       },
     },
   }
