@@ -21,6 +21,9 @@ import './plugins/vee-validate'
 import vuetify from './plugins/vuetify'
 import i18n from './i18n'
 
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
 Vue.config.productionTip = false
 
 new Vue({
@@ -28,5 +31,7 @@ new Vue({
   store,
   vuetify,
   i18n,
+  axios,
+  VueAxios,
   render: h => h(App),
 }).$mount('#app')
