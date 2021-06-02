@@ -55,9 +55,9 @@ export default new Router({
           path: 'upgrade',
           component: () => import('@/views/dashboard/Upgrade'),
         },
-        // Login
+        // Post
         {
-          name: 'Post',
+          name: 'Post Form',
           path: 'post',
           component: () => import('./components/base/Post'),
         },
@@ -72,6 +72,18 @@ export default new Router({
           name: 'Add Post Category',
           path: 'category/add',
           component: () => import('./components/base/Category/Add'),
+        },
+        // Login Form
+        {
+          name: 'Login Form',
+          path: 'login',
+          component: () => import('./components/base/Login'),
+        },
+        // Registration Form
+        {
+          name: 'Registration Form',
+          path: 'registration',
+          component: () => import('./components/base/Registration'),
         },
       ],
     },

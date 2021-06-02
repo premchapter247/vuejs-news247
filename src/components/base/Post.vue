@@ -1,45 +1,35 @@
-// eslint-disable-next-line /* eslint-disable */
 <template>
-  <v-container
-    fluid
-    tag="section"
-  >
+  <v-container fluid tag="section">
     <v-row justify="center">
-      <v-col
-        cols="12"
-        md="10"
-      >
-        <div class="v-card--material pa-5 v-card v-sheet theme--light v-card--material--has-heading">
+      <v-col cols="12" md="10">
+        <div
+          class="
+            v-card--material
+            pa-5
+            elevation-10
+            v-card v-sheet
+            v-card--material--has-heading
+          "
+        >
           <div class="d-flex grow flex-wrap">
             <div
-              class="text-start v-card--material__heading mb-n6 v-sheet theme--dark elevation-6 success pa-7"
+              class="
+                text-start
+                v-card--material__heading
+                mb-n6
+                v-sheet
+                elevation-6
+                success
+                pa-7
+              "
               style="width: 100%"
             >
-              <div class="text-h3 font-weight-light">
-                Edit Profile
-              </div>
+              <div class="text-h3 white--text font-weight-light">Edit Profile</div>
             </div>
           </div>
 
-          <ValidationObserver v-slot="{ handleSubmit }">
-            <v-form
-              class="px-3 py-1"
-              @submit.prevent="handleSubmit(onSubmit)"
-            >
-              <ValidationProvider
-                v-slot="{ errors }"
-                name="Email"
-                rules="required|email"
-              >
-                <v-col cols="12">
-                  <v-text-field
-                    v-model="formData.email"
-                    label="Email"
-                  />
-                  <span class="red--text"> {{ errors[0] }} </span>
-                </v-col>
-              </ValidationProvider>
-
+          <ValidationObserver ref="observer" v-slot="{ invalid }">
+            <v-form class="px-3 py-1" @submit.prevent="onSubmit">
               <ValidationProvider
                 v-slot="{ errors }"
                 name="Title"
@@ -47,10 +37,26 @@
               >
                 <v-col cols="12">
                   <v-text-field
-                    v-model="formData.title"
+                    v-model="title"
                     label="Title"
+                    :error-messages="errors"
+                    required
                   />
-                  <span class="red--text"> {{ errors[0] }} </span>
+                </v-col>
+              </ValidationProvider>
+
+              <ValidationProvider
+                v-slot="{ errors }"
+                name="Email"
+                rules="required|email"
+              >
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="email"
+                    :error-messages="errors"
+                    label="Email"
+                    required
+                  />
                 </v-col>
               </ValidationProvider>
 
@@ -61,27 +67,28 @@
               >
                 <v-col cols="12">
                   <v-select
-                    :items="formData.items"
+                    v-model="select"
+                    :items="items"
+                    :error-messages="errors"
                     label="Category"
-                    v-model="formData.select"
                     dense
-
+                    required
                   />
-                  <span class="red--text"> {{ errors[0] }} </span>
                 </v-col>
               </ValidationProvider>
 
               <ValidationProvider
                 v-slot="{ errors }"
                 name="Short discription"
-                rules="required|min:20|max:100"
+                rules="required|min:20"
               >
                 <v-col cols="12">
                   <v-text-field
-                    v-model="formData.short_description"
+                    v-model="short_description"
                     label="Short Description"
+                    :error-messages="errors"
+                    :counter="20"
                   />
-                  <span class="red--text"> {{ errors[0] }} </span>
                 </v-col>
               </ValidationProvider>
 
@@ -92,34 +99,35 @@
               >
                 <v-col cols="12">
                   <v-textarea
-                    v-model="formData.description"
+                    v-model="description"
+                    :error-messages="errors"
                     label="Description"
+                    :counter="50"
                   />
-                  <span class="red--text">{{ errors[0] }}</span>
                 </v-col>
               </ValidationProvider>
 
               <ValidationProvider
                 v-slot="{ errors }"
                 name="Image"
-                rules="required|image|mimes:image/*|size:10240"
+                rules="required"
               >
                 <v-col cols="12">
                   <v-file-input
-                    v-model="formData.image"
+                    v-model="image"
+                    accept="image/*"
+                    :error-messages="errors"
                     label="Image"
+                    truncate-length="50"
                   />
-                  <span class="red--text">{{ errors[0] }}</span>
                 </v-col>
               </ValidationProvider>
 
               <v-col cols="12">
-                <v-btn
-                  class="success"
-                  @click="handleSubmit(onSubmit)"
-                >
+                <v-btn class="success mr-5" @click="onSubmit" :disabled="invalid">
                   Click Me!
                 </v-btn>
+                <v-btn class="success" @click="clear"> clear </v-btn>
               </v-col>
             </v-form>
           </ValidationObserver>
@@ -130,27 +138,63 @@
 </template>
 
 <script>
+import { required, email, min } from "vee-validate/dist/rules";
+import {
+  extend,
+  ValidationObserver,
+  ValidationProvider,
+  setInteractionMode,
+} from "vee-validate";
+
+setInteractionMode("eager");
+
+extend("required", {
+  ...required,
+  message: "{_field_} can not be empty",
+});
+
+extend("min", {
+  ...min,
+  message: "{_field_} may not be greater than {length} characters",
+});
+
+extend("email", {
+  ...email,
+  message: "Email must be valid",
+});
 export default {
-  name: 'Post',
+  name: "Post",
+  components: {
+    ValidationObserver,
+    ValidationProvider,
+  },
   data() {
     return {
-      formData: {
-        title: '',
-        items: ['item-1', 'item-2', 'item-3', 'item-4'],
-        select: '',
-        short_description: '',
-        description: '',
-        image: '',
-        email: '',
-      },
-    }
+      title: "",
+      email: "",
+      items: ["item-1", "item-2", "item-3", "item-4"],
+      short_description: "",
+      description: "",
+      select: null,
+      image: null,
+    };
   },
   methods: {
     onSubmit() {
-      alert('Form has been submitted.')
-      console.log(this.formData)
-      this.title = ''
+      alert("Form has been submitted.");
+      console.log(this.formData);
+      this.$refs.observer.validate();
+      this.clear();
+    },
+    clear() {
+      this.title = "";
+      this.short_description = "";
+      this.description = "";
+      this.select = null;
+      this.email = "";
+      this.image = null;
+      this.$refs.observer.reset();
     },
   },
-}
+};
 </script>

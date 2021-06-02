@@ -23,8 +23,8 @@
                 >
                   <ValidationProvider
                     v-slot="{ errors }"
-                    name="Email"
-                    rules="required|alpha"
+                    name="Category"
+                    rules="required"
                   >
                     <v-text-field
                       v-model="title"
