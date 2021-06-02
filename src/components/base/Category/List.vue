@@ -10,7 +10,6 @@
       class="px-5 py-3"
     >
       <v-btn
-
         color="secondary"
         elevation="2"
         to="/category/add"
@@ -32,7 +31,7 @@
         <tbody>
           <tr
             v-for="item in list"
-            v-bind:key="item.id"
+            :key="item.id"
           >
             <td> {{ item.id }} </td>
             <td> {{ item.title }} </td>
@@ -40,9 +39,7 @@
         </tbody>
       </v-simple-table>
     </base-material-card>
-
     <div class="py-3" />
-
   </v-container>
 </template>
 <script>
