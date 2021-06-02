@@ -12,7 +12,7 @@
 
     components: {
       FrontFooter: () => import('./component/Footer'),
-      MenuDrawer: () => import('./components/Menu'),
+      MenuDrawer: () => import('./component/Menu'),
     },
 
     data: () => ({
