@@ -122,24 +122,14 @@
           to: '/tables/regular-tables',
         },
         {
-          title: 'typography',
-          icon: 'mdi-format-font',
-          to: '/components/typography',
-        },
-        {
           title: 'icons',
           icon: 'mdi-chart-bubble',
           to: '/components/icons',
         },
         {
-          title: 'google',
-          icon: 'mdi-map-marker',
-          to: '/maps/google-maps',
-        },
-        {
-          title: 'notifications',
-          icon: 'mdi-bell',
-          to: '/components/notifications',
+          title: 'Category',
+          icon: 'mdi-account-box-outline',
+          to: '/category/list',
         },
       ],
     }),
