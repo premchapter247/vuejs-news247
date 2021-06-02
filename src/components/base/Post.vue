@@ -36,22 +36,7 @@
                     v-model="formData.email"
                     label="Email"
                   />
-                  <span class="green--text"> {{ errors[0] }} </span>
-                </v-col>
-              </ValidationProvider>
-
-              <ValidationProvider
-                v-slot="{ errors }"
-                name="Password"
-                :rules="{ regex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/ }"
-              >
-                <v-col cols="12">
-                  <v-text-field
-                    v-model="formData.password"
-                    label="Password"
-                    type="password"
-                  />
-                  <span class="green--text"> {{ errors[0] }} Minimum eight and maximum 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character: </span>
+                  <span class="red--text"> {{ errors[0] }} </span>
                 </v-col>
               </ValidationProvider>
 
@@ -65,7 +50,7 @@
                     v-model="formData.title"
                     label="Title"
                   />
-                  <span class="green--text"> {{ errors[0] }} </span>
+                  <span class="red--text"> {{ errors[0] }} </span>
                 </v-col>
               </ValidationProvider>
 
@@ -78,9 +63,11 @@
                   <v-select
                     :items="formData.items"
                     label="Category"
+                    v-model="formData.select"
                     dense
+
                   />
-                  <span class="green--text"> {{ errors[0] }} </span>
+                  <span class="red--text"> {{ errors[0] }} </span>
                 </v-col>
               </ValidationProvider>
 
@@ -94,7 +81,7 @@
                     v-model="formData.short_description"
                     label="Short Description"
                   />
-                  <span class="green--text"> {{ errors[0] }} </span>
+                  <span class="red--text"> {{ errors[0] }} </span>
                 </v-col>
               </ValidationProvider>
 
@@ -108,42 +95,28 @@
                     v-model="formData.description"
                     label="Description"
                   />
-                  <span class="green--text">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </v-col>
               </ValidationProvider>
 
               <ValidationProvider
                 v-slot="{ errors }"
                 name="Image"
-                rules="required|image|mimes:image/*|dimensions:100,100|size:100"
+                rules="required|image|mimes:image/*|size:10240"
               >
                 <v-col cols="12">
                   <v-file-input
                     v-model="formData.image"
                     label="Image"
                   />
-                  <span class="green--text">{{ errors[0] }}</span>
-                </v-col>
-              </ValidationProvider>
-
-              <ValidationProvider
-                v-slot="{ errors }"
-                name="Image"
-                rules="required|image|mimes:image/*|dimensions:100,100|size:100"
-              >
-                <v-col cols="12">
-                  <v-file-input
-                    v-model="formData.image"
-                    label="Image"
-                  />
-                  <span class="green--text">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </v-col>
               </ValidationProvider>
 
               <v-col cols="12">
                 <v-btn
-                  text
                   class="success"
+                  @click="handleSubmit(onSubmit)"
                 >
                   Click Me!
                 </v-btn>
@@ -157,26 +130,27 @@
 </template>
 
 <script>
-  export default {
-    name: 'Post',
-    data () {
-      return {
-        formData: {
-          title: '',
-          items: ['item-1', 'item-2', 'item-3', 'item-4'],
-          short_description: '',
-          description: '',
-          image: '',
-          email: '',
-          password: '',
-        },
-      }
-    },
-    methods: {
-      onSubmit () {
-        alert('form has been submitted.')
-        console.log(this.formData)
+export default {
+  name: 'Post',
+  data() {
+    return {
+      formData: {
+        title: '',
+        items: ['item-1', 'item-2', 'item-3', 'item-4'],
+        select: '',
+        short_description: '',
+        description: '',
+        image: '',
+        email: '',
       },
+    }
+  },
+  methods: {
+    onSubmit() {
+      alert('Form has been submitted.')
+      console.log(this.formData)
+      this.title = ''
     },
-  }
+  },
+}
 </script>
