@@ -12,7 +12,7 @@
       <v-btn
         color="secondary"
         elevation="2"
-        to="/category/add"
+        to="/admin/category/add"
       >
         Add post
       </v-btn>

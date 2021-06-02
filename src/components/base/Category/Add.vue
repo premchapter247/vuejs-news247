@@ -68,7 +68,7 @@ export default {
     submit() {
       console.warn(this.title);
       const token =
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwM1wvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyMjQ2NTQ5OCwiZXhwIjoxNjIyNDY5MDk4LCJuYmYiOjE2MjI0NjU0OTgsImp0aSI6IjFEQWN6ekZpWUZZNUREazIiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.iD8-02M6KgBSPW3_ZR3k4CC1uZtW9nthSxtMxt48Wcw";
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9yZWdpc3RlciIsImlhdCI6MTYyMjYzMjU2NywiZXhwIjoxNjIyNjM2MTY3LCJuYmYiOjE2MjI2MzI1NjcsImp0aSI6InFkM0dzSzUwdEJzSGdROE4iLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.rTXPl1BOLBu1q-nWU1BWbkq58yyRPwLgROrQGHGFN_I";
       axios
         .post(
           "http://127.0.0.1:8000/api/category/store",

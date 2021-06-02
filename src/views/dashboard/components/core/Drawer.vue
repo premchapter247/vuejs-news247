@@ -109,27 +109,27 @@
         {
           icon: 'mdi-view-dashboard',
           title: 'dashboard',
-          to: '/',
+          to: '/admin',
         },
         {
           icon: 'mdi-account',
           title: 'user',
-          to: '/pages/user',
+          to: '/admin/pages/user',
         },
         {
           title: 'rtables',
           icon: 'mdi-clipboard-outline',
-          to: '/tables/regular-tables',
+          to: '/admin/tables/regular-tables',
         },
         {
           title: 'icons',
           icon: 'mdi-chart-bubble',
-          to: '/components/icons',
+          to: '/admin/components/icons',
         },
         {
           title: 'Category',
           icon: 'mdi-account-box-outline',
-          to: '/category/list',
+          to: '/admin/category/list',
         },
       ],
     }),
