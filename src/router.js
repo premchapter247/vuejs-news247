@@ -77,7 +77,7 @@ export default new Router({
     },
     {
       path: '/',
-      component: () => import('@/views/front/index'),
+      component: () => import('@/views/front/Index'),
      
     }
   ],
