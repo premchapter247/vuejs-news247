@@ -20,9 +20,14 @@ import './plugins/chartist'
 import './plugins/vee-validate'
 import vuetify from './plugins/vuetify'
 import i18n from './i18n'
-
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+
+import { ValidationProvider } from 'vee-validate/dist/vee-validate.full.esm'
+import { ValidationObserver } from 'vee-validate'
+
+Vue.component('ValidationProvider', ValidationProvider)
+Vue.component('ValidationObserver', ValidationObserver)
 
 Vue.config.productionTip = false
 
