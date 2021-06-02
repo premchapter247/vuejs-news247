@@ -7,7 +7,7 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: '/admin',
       component: () => import('@/views/dashboard/Index'),
       children: [
         // Dashboard
@@ -87,5 +87,10 @@ export default new Router({
         },
       ],
     },
+    {
+      path: '/',
+      component: () => import('@/views/front/Index'),
+     
+    }
   ],
 })
