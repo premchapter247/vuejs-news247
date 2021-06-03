@@ -76,7 +76,7 @@ export default new Router({
       ],
     },
     {
-      path: '/',
+      path: '/auth',
       component: () => import('@/views/dashboard/Login'),
       children: [
         // Login Form
