@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    
     <FrontTopBar />
     <LogoTopWrap />
     <MenuDrawer />
