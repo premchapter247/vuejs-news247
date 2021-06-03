@@ -86,17 +86,17 @@ export default new Router({
           component: () => import('./components/base/Login'),
         },
         // Registration Form
-        // {
-        //   name: 'Registration Form',
-        //   path: 'registration',
-        //   component: () => import('./components/base/Registration'),
-        // },
+        {
+          name: 'Registration Form',
+          path: 'registration',
+          component: () => import('./components/base/Registration'),
+        },
       ],
     },
     {
       path: '/',
       component: () => import('@/views/front/Index'),
-     
+
     }
   ],
 })
