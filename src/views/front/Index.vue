@@ -1,7 +1,8 @@
 <template>
   <v-app>
+    <FrontTopBar />
     <MenuDrawer />
-      <FrontFooter />
+    <FrontFooter />
 
   </v-app>
 </template>
@@ -11,6 +12,7 @@
     name: 'Index',
 
     components: {
+      FrontTopBar:  () => import('./component/TopBar'),
       FrontFooter: () => import('./component/Footer'),
       MenuDrawer: () => import('./component/Menu'),
     },
@@ -20,3 +22,12 @@
     }),
   }
 </script>
+<style>
+.container{
+  padding-bottom: 0;
+  padding-top: 0;
+}
+.white_bg {
+    background: #fff!important;
+}
+</style>
