@@ -67,8 +67,7 @@ export default {
   methods: {
     submit() {
       console.warn(this.title);
-      const token =
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9yZWdpc3RlciIsImlhdCI6MTYyMjYzMjU2NywiZXhwIjoxNjIyNjM2MTY3LCJuYmYiOjE2MjI2MzI1NjcsImp0aSI6InFkM0dzSzUwdEJzSGdROE4iLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.rTXPl1BOLBu1q-nWU1BWbkq58yyRPwLgROrQGHGFN_I";
+      const token = localStorage.getItem('user-token') || ''
       axios
         .post(
           "http://127.0.0.1:8000/api/category/store",
@@ -78,7 +77,7 @@ export default {
         .then((response) => {
           // console.warn(response.data)
           if (response.data.status === 200) {
-            this.$router.push({ path: "/category/list" });
+            this.$router.push({ path: "/admin/category/list" });
           }
         });
     },

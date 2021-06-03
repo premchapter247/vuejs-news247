@@ -73,6 +73,12 @@ export default new Router({
           path: 'category/add',
           component: () => import('./components/base/Category/Add'),
         },
+      ],
+    },
+    {
+      path: '/',
+      component: () => import('@/views/dashboard/Login'),
+      children: [
         // Login Form
         {
           name: 'Login Form',
@@ -80,11 +86,11 @@ export default new Router({
           component: () => import('./components/base/Login'),
         },
         // Registration Form
-        {
-          name: 'Registration Form',
-          path: 'registration',
-          component: () => import('./components/base/Registration'),
-        },
+        // {
+        //   name: 'Registration Form',
+        //   path: 'registration',
+        //   component: () => import('./components/base/Registration'),
+        // },
       ],
     },
     {

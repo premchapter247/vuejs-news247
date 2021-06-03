@@ -80,6 +80,7 @@
 
 <script>
 import { required, email, min, regex } from "vee-validate/dist/rules";
+import axios from "axios";
 import {
   extend,
   ValidationObserver,
@@ -123,7 +124,18 @@ export default {
 
   methods: {
     onSubmit() {
-      alert("Hello");
+      axios
+        .post(
+          "http://127.0.0.1:8000/api/auth/login",
+          { email: this.email ,password:this.password},
+        )
+        .then((response) => {
+          if (response.data.token_type == "bearer") {
+          const token = response.data.access_token 
+          localStorage.setItem('user-token', token)
+          this.$router.push({ path: "/admin" });
+          }
+        });
       this.$refs.observer.validate();
     },
     clear() {
