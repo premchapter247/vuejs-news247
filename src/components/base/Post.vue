@@ -24,7 +24,9 @@
               "
               style="width: 100%"
             >
-              <div class="text-h3 white--text font-weight-light">Edit Profile</div>
+              <div class="text-h3 white--text font-weight-light">
+                Edit Profile
+              </div>
             </div>
           </div>
 
@@ -37,24 +39,9 @@
               >
                 <v-col cols="12">
                   <v-text-field
-                    v-model="title"
+                    v-model="formData.title"
                     label="Title"
                     :error-messages="errors"
-                    required
-                  />
-                </v-col>
-              </ValidationProvider>
-
-              <ValidationProvider
-                v-slot="{ errors }"
-                name="Email"
-                rules="required|email"
-              >
-                <v-col cols="12">
-                  <v-text-field
-                    v-model="email"
-                    :error-messages="errors"
-                    label="Email"
                     required
                   />
                 </v-col>
@@ -67,8 +54,8 @@
               >
                 <v-col cols="12">
                   <v-select
-                    v-model="select"
-                    :items="items"
+                    v-model="formData.select"
+                    :items="formData.items"
                     :error-messages="errors"
                     label="Category"
                     dense
@@ -80,14 +67,13 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 name="Short discription"
-                rules="required|min:20"
+                rules="required"
               >
                 <v-col cols="12">
                   <v-text-field
-                    v-model="short_description"
+                    v-model="formData.short_description"
                     label="Short Description"
                     :error-messages="errors"
-                    :counter="20"
                   />
                 </v-col>
               </ValidationProvider>
@@ -95,14 +81,13 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 name="Discription"
-                rules="required|min:50"
+                rules="required"
               >
                 <v-col cols="12">
                   <v-textarea
-                    v-model="description"
+                    v-model="formData.description"
                     :error-messages="errors"
                     label="Description"
-                    :counter="50"
                   />
                 </v-col>
               </ValidationProvider>
@@ -114,7 +99,7 @@
               >
                 <v-col cols="12">
                   <v-file-input
-                    v-model="image"
+                    v-model="formData.image"
                     accept="image/*"
                     :error-messages="errors"
                     label="Image"
@@ -124,7 +109,11 @@
               </ValidationProvider>
 
               <v-col cols="12">
-                <v-btn class="success mr-5" @click="onSubmit" :disabled="invalid">
+                <v-btn
+                  class="success mr-5"
+                  @click="onSubmit"
+                  :disabled="invalid"
+                >
                   Click Me!
                 </v-btn>
                 <v-btn class="success" @click="clear"> clear </v-btn>
@@ -138,7 +127,7 @@
 </template>
 
 <script>
-import { required, email, min } from "vee-validate/dist/rules";
+import { required, min } from "vee-validate/dist/rules";
 import {
   extend,
   ValidationObserver,
@@ -158,10 +147,6 @@ extend("min", {
   message: "{_field_} may not be greater than {length} characters",
 });
 
-extend("email", {
-  ...email,
-  message: "Email must be valid",
-});
 export default {
   name: "Post",
   components: {
@@ -170,13 +155,14 @@ export default {
   },
   data() {
     return {
-      title: "",
-      email: "",
-      items: ["item-1", "item-2", "item-3", "item-4"],
-      short_description: "",
-      description: "",
-      select: null,
-      image: null,
+      formData: {
+        title: "",
+        items: ["item-1", "item-2", "item-3", "item-4"],
+        short_description: "",
+        description: "",
+        select: null,
+        image: null,
+      },
     };
   },
   methods: {
@@ -187,12 +173,11 @@ export default {
       this.clear();
     },
     clear() {
-      this.title = "";
-      this.short_description = "";
-      this.description = "";
-      this.select = null;
-      this.email = "";
-      this.image = null;
+      this.formData.title = "";
+      this.formData.short_description = "";
+      this.formData.description = "";
+      this.formData.select = null;
+      this.formData.image = null;
       this.$refs.observer.reset();
     },
   },
