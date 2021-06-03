@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <FrontTopBar />
     <MenuDrawer />
     <LatestNews />
     <FrontFooter />
@@ -12,6 +13,7 @@
     name: 'Index',
 
     components: {      
+      FrontTopBar:  () => import('./component/TopBar'),
       MenuDrawer: () => import('./component/Menu'),
       LatestNews: () => import('./component/LatestNews'),
       FrontFooter: () => import('./component/Footer'),
@@ -22,3 +24,12 @@
     }),
   }
 </script>
+<style>
+.container{
+  padding-bottom: 0;
+  padding-top: 0;
+}
+.white_bg {
+    background: #fff!important;
+}
+</style>

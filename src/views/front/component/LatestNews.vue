@@ -28,8 +28,8 @@
 </template>
 <script>
   import VueSlickCarousel from 'vue-slick-carousel'
-  // optional style for arrows & dots
-  import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+  import 'vue-slick-carousel/dist/vue-slick-carousel.css'
+  /* import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css' */
 
   import axios from 'axios'
 
