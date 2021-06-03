@@ -127,7 +127,7 @@
 </template>
 
 <script>
-import { required, min } from "vee-validate/dist/rules";
+import { required } from "vee-validate/dist/rules";
 import {
   extend,
   ValidationObserver,
@@ -140,11 +140,6 @@ setInteractionMode("eager");
 extend("required", {
   ...required,
   message: "{_field_} can not be empty",
-});
-
-extend("min", {
-  ...min,
-  message: "{_field_} may not be greater than {length} characters",
 });
 
 export default {

@@ -18,7 +18,7 @@
               style="width: 100%"
             >
               <div class="text-h3 text-center white--text font-weight-light">
-                Registration
+                Register New Account
               </div>
             </div>
           </div>
@@ -59,14 +59,11 @@
 
                 <ValidationProvider
                   v-slot="{ errors }"
-                  name="phoneNumber"
-                  :rules="{
-                    required: true,
-                    digits: 10,
-                    regex: '^(71|72|74|76|81|82|84|85|86|87|88|89)\\d{8}$',
-                  }"
+                  name="Phone number"
+                  rules="required|digits:10|customPhoneNumber"
                 >
                   <v-text-field
+                    type="tel"
                     v-model="phoneNumber"
                     :counter="10"
                     :error-messages="errors"
@@ -93,12 +90,8 @@
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="Password"
-                  :rules="{
-                    regex:
-                      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).*$/,
-                    required: true,
-                    min: 8,
-                  }"
+                  rules="required|customPassword|min:8"
+                  :balls="true"
                 >
                   <v-text-field
                     v-model="password"
@@ -108,24 +101,21 @@
                     :type="showPassword ? 'text' : 'password'"
                     :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                     @click:append="showPassword = !showPassword"
+                    required
                   >
                   </v-text-field>
                 </ValidationProvider>
 
                 <ValidationProvider
                   v-slot="{ errors }"
-                  name="Confirm Password"
-                  :rules="{
-                    regex:
-                      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).*$/,
-                    required: true,
-                    min: 8,
-                  }"
+                  name="Confirm password"
+                  rules="confirmPassword"
                 >
                   <v-text-field
                     v-model="confirm_password"
                     :error-messages="errors"
                     label="Confirm Password"
+                    :counter="20"
                     :type="showConfirmPassword ? 'text' : 'password'"
                     :append-icon="
                       showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'
@@ -134,13 +124,11 @@
                   >
                   </v-text-field>
                 </ValidationProvider>
-                <v-divide>
-                  <v-card-actions class="d-flex justify-space-between">
-                    <v-btn class="success" @click="onSubmit" :disabled="invalid"
-                      >Login</v-btn
-                    >
-                  </v-card-actions>
-                </v-divide>
+                <v-card-actions>
+                  <v-btn class="success" @click="onSubmit" :disabled="invalid"
+                    >Register</v-btn
+                  >
+                </v-card-actions>
               </v-form>
             </ValidationObserver>
           </v-card-text>
@@ -158,7 +146,6 @@ import {
   max,
   alpha,
   digits,
-  regex,
 } from "vee-validate/dist/rules";
 import axios from "axios";
 import {
@@ -170,6 +157,57 @@ import {
 
 setInteractionMode("eager");
 
+var errorMessage =
+  "requires 1 of each of the following: uppercase letter, lowercase letter, number, special character (!@#$%^&*-).";
+extend("customPassword", {
+  message: (field) => `The ${field} ${errorMessage}`,
+  validate: (value) => {
+    var mustContainTheseChars =
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*-]).*$/;
+    var notTheseChars = /["'?/<>\s]/;
+    var containsRequiredChars = mustContainTheseChars.test(value);
+    var containsForbiddenChars = notTheseChars.test(value);
+    if (containsRequiredChars && !containsForbiddenChars) {
+      return true;
+    } else {
+      if (containsForbiddenChars) {
+        errorMessage = `contains forbidden characters: " ' + ? / < > or space`;
+      } else {
+        errorMessage = `min length 8 characters, and must include 1 uppercase letter, lowercase letter, number, special character (!@#$%^&*-).`;
+      }
+      return false;
+    }
+  },
+});
+
+var errorPhoneNumber = "requires 10 digits.";
+extend("customPhoneNumber", {
+  message: (field) => `The ${field} ${errorPhoneNumber}`,
+  validate: (value) => {
+    var mustContainTheseNumber = /^[6-9]{1}[0-9]{9}$/;
+    var containsRequiredNumber = mustContainTheseNumber.test(value);
+    if (containsRequiredNumber) {
+      return true;
+    } else {
+      errorPhoneNumber = "is incorrect.";
+      return false;
+    }
+  },
+});
+
+var confirmedPassword= "is required.";
+extend("confirmPassword", {
+  message: (field) => `The ${field} ${confirmedPassword}`,
+  validate: (value) => {
+    if (value === this.password) {
+      return true;
+    } else {
+      confirmedPassword = "must be same.";
+      return false;
+    }
+  },
+});
+
 extend("required", {
   ...required,
   message: "{_field_} can not be empty",
@@ -177,7 +215,7 @@ extend("required", {
 
 extend("digits", {
   ...digits,
-  message: "{_field_} needs to be {length} digits. ({_value_})",
+  message: "{_field_} needs to be {length} digits.",
 });
 
 extend("alpha", {
@@ -196,12 +234,6 @@ extend("max", {
   message: "{_field_} may not be greater than {length} characters",
 });
 
-extend("regex", {
-  ...regex,
-  message:
-    "Password requires 1 of each of the following: uppercase letter, lowercase letter, number, special character.",
-});
-
 extend("email", {
   ...email,
   message: "Email must be valid",
@@ -218,12 +250,29 @@ export default {
     first_name: "",
     last_name: "",
     email: "",
-    password: null,
-    phoneNumber: null
+    phoneNumber: null,
+    password: "",
+    confirm_password: "",
   }),
 
   methods: {
     onSubmit() {
+      console.log(
+        this.first_name +
+          " " +
+          this.last_name +
+          " " +
+          this.email +
+          " " +
+          this.phoneNumber +
+          " " +
+          this.password +
+          " " +
+          this.confirm_password
+      );
+      this.$refs.observer.validate();
+      this.clear();
+
       axios
         .post("http://127.0.0.1:8000/api/auth/login", {
           email: this.email,
@@ -236,10 +285,17 @@ export default {
             this.$router.push({ path: "/admin" });
           }
         });
-      this.$refs.observer.validate();
     },
     clear() {
-      this.$refs.observer.reset();
+      (this.showPassword = false),
+        (this.showConfirmPassword = false),
+        (this.first_name = ""),
+        (this.last_name = ""),
+        (this.email = ""),
+        (this.phoneNumber = null),
+        (this.password = ""),
+        (this.confirm_password = ""),
+        this.$refs.observer.reset();
     },
   },
 };
