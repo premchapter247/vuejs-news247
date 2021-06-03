@@ -5,14 +5,25 @@
                 <div class="trand">
                     Tranding
                 </div>
-            </div>
-            <div>
-                <VueSlickCarousel :arrows="true" :dots="true">
-                <div>1</div>
-                <div>2</div>
-                <div>3</div>
-                <div>4</div>
-                </VueSlickCarousel>
+                <div class="topbar-slick-wrap">
+                    <div>
+                        <VueSlickCarousel :arrows="true">
+                            <div><a href="" draggable="false">Top 10 Best Movies of 2018 So Far: Great Movies To Watch Now</a></div>
+                            <div><a href="" draggable="false">Top 5 Best Web Series To Watch Now</a></div>
+                            <div><a href="" draggable="false">Top 247's Breaking News</a></div>
+                            <div><a href="" draggable="false">Khali fan's not taking dum in commenting</a></div>
+                            <div><a href="" draggable="false">KKR review on Radhe:Salman Khan's Film</a></div>
+                        </VueSlickCarousel>
+                    </div>
+                </div>
+                <div class="topbar-right">
+                    <div class="top-date-wrap">
+                        Thursday, June 03, 2021
+                    </div>
+                    <div class="socialicons">
+
+                    </div>
+                </div>
             </div>
         </v-container>
     </div>
@@ -35,6 +46,9 @@ export default {
     }
     .topbar-inner{
         display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
     }
     .trand{
         margin-right: 10px;
@@ -44,5 +58,86 @@ export default {
         font-weight: 500;
         color: #fff;
         line-height: 17px;
+        display: inline-block;
+    }
+    .topbar-slick-wrap{
+        width: 100%;
+        display: block;
+        max-width: 600px;
+        margin-right: auto;
+        padding: 12px;
+        font-size: 14px;
+        line-height: 17px;        
+        padding-right: 60px;
+    }
+    .topbar-slick-wrap a{
+        color: #17222b;
+        opacity: .85;
+        display: block;
+        word-break: break-word;
+        white-space: nowrap;
+        text-decoration: none;
+    }
+    .slick-prev, .slick-next,.slick-prev:before,.slick-next:before{
+        height: 23px;
+        width: 23px;
+        line-height: 23px;
+        opacity: 1;
+    }
+    .slick-prev:hover, .slick-next:hover,.slick-prev:hover:before,.slick-next:hover:before{
+        background-color: #1091ff;
+        border-color: #1091ff;
+        color: #fff;
+    }
+    .slick-prev:before, .slick-next:before{
+        padding: 0;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        border: 1px solid #c1c4c6;
+        color: #c1c4c6;
+        background: #fff;
+        transition: all .3s;
+        font: normal normal normal 24px/1 "Material Design Icons";
+        font-size: 16px;
+        text-rendering: auto;
+        line-height: 16px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    .slick-prev:before{
+        content: "\F0141";
+    }
+    .slick-next:before{
+        content: "\F0142";
+    }
+    .topbar-inner .slick-prev {
+        right: -25px;
+        left: auto;
+    }
+    .topbar-inner .slick-next {
+        right: -55px;
+    }
+    .topbar-right{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .topbar .top-date-wrap{
+        font-size: 14px;
+        font-weight: 400;
+        opacity: .85;
+        color: #17222b;
+        text-transform: capitalize;
+    }
+    .topbar .socialicons-wrap{
+        padding-left: 25px;
+        margin-left: 10px;
+        position: relative;
+        z-index: 2;
+    }
+    .socialicons-wrap{
+        display: flex;
     }
 </style>
