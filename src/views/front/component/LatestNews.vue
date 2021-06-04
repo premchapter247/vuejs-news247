@@ -4,37 +4,37 @@
             <v-col cols="11" sm="10" md="10" lg="8">
                 <div>
                     <VueSlickCarousel
-                        :arrows="true"
-                        ref="c1"
-                        :asNavFor="$refs.c2"
-                        :focusOnSelect="true">
+                    :arrows="true"
+                    ref="c1"
+                    :asNavFor="$refs.c2"
+                    :focusOnSelect="true">
 
-                            <div v-for="item in list"
-                                :key="item.id">
-                                <v-img
-                                src="https://picsum.photos/id/11/500/300"
-                                ></v-img>
-                            </div>
+                        <div v-for="item in list"
+                            :key="item.id">
+                            <v-img
+                            :src="'http://127.0.0.1:8000/image/'+ item.image"
+                            ></v-img>
+                        </div>
 
 
-                        </VueSlickCarousel>
-                        <VueSlickCarousel
-                        :arrows="true"
-                        ref="c2"
-                        :asNavFor="$refs.c1"
-                        :slidesToShow="4"
-                        :focusOnSelect="true">
+                    </VueSlickCarousel>
+                    <VueSlickCarousel
+                    :arrows="true"
+                    ref="c2"
+                    :asNavFor="$refs.c1"
+                    :slidesToShow="4"
+                    :focusOnSelect="true">
 
-                            <div v-for="item in list"
-                                :key="item.id">
-                                <v-img
-                                max-height="150"
-                                max-width="250"
-                                src="https://picsum.photos/id/11/500/300"
-                                ></v-img>
-                            </div>
+                        <div v-for="item in list"
+                            :key="item.id">
+                            <v-img
+                            max-height="150"
+                            max-width="250"
+                            :src="'http://127.0.0.1:8000/image/'+ item.image"
+                            ></v-img>
+                        </div>
 
-                        </VueSlickCarousel>
+                    </VueSlickCarousel>
                 </div>
             </v-col>
             <v-col cols="11" sm="10" md="10" lg="4">
