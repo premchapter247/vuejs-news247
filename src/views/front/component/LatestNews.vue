@@ -12,7 +12,7 @@
                         <div v-for="item in list"
                             :key="item.id">
                             <v-img
-                            src="https://picsum.photos/id/11/500/300"
+                            :src="'http://127.0.0.1:8000/image/'+ item.image"
                             ></v-img>
                         </div>
 
@@ -30,7 +30,7 @@
                             <v-img
                             max-height="150"
                             max-width="250"
-                            src="{item.image}"
+                            :src="'http://127.0.0.1:8000/image/'+ item.image"
                             ></v-img>
                         </div>
 
@@ -38,27 +38,27 @@
                 </div>
             </v-col>
             <v-col cols="11" sm="10" md="10" lg="4">
-                <RightTabbing> </RightTabbing>
+                <PostListView> </PostListView>
             </v-col>
 
-            <v-col cols="11" sm="10" md="10" lg="12">
-                <FeatureNews> </FeatureNews>
-            </v-col>
         </v-row>
+            <v-row cols="11" sm="10" md="10" lg="12">
+                <FeatureNews> </FeatureNews>
+            </v-row>
     </v-container>
 </template>
 <script>
   import VueSlickCarousel from 'vue-slick-carousel'
   import 'vue-slick-carousel/dist/vue-slick-carousel.css'
   import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
-  import RightTabbing from './RightTabbing'
+  import PostListView from './PostListView'
   import FeatureNews from './FeatureNews'
 
   import axios from 'axios'
 
   export default {
     name: 'LatestNews',
-    components: { VueSlickCarousel, RightTabbing, FeatureNews },
+    components: { VueSlickCarousel, PostListView, FeatureNews },
     data () {
       return {
           list: 'undefined',
