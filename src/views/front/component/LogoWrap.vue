@@ -18,6 +18,7 @@ export default {
 .logo{
     max-width: 250px;
     display: block;
+    margin: auto;
 }
 .logo-wrap{
     padding: 20px 0;
