@@ -12,7 +12,7 @@
                         <div v-for="item in list"
                             :key="item.id">
                             <v-img
-                            src="https://picsum.photos/id/11/500/300"
+                            :src="'http://127.0.0.1:8000/image/'+ item.image"
                             ></v-img>
                         </div>
 
@@ -30,7 +30,7 @@
                             <v-img
                             max-height="150"
                             max-width="250"
-                            src="{item.image}"
+                            :src="'http://127.0.0.1:8000/image/'+ item.image"
                             ></v-img>
                         </div>
 
