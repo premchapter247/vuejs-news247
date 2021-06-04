@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-<template>
-    <v-container>
-        <div>Logo</div>
-    </v-container>
-=======
 <template>  
     <section class="logo-wrap white_bg">
         <v-container>
@@ -14,7 +8,6 @@
             </a>
         </v-container>
     </section>
->>>>>>> 6992c795ae5e431d67e74a32f18d0d43fae66be1
 </template>
 <script>
 export default {
