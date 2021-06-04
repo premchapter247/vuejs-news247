@@ -1,5 +1,5 @@
 <template>
-    <v-container> Hello </v-container>
+    <v-container> Post List View </v-container>
 </template>
 
 <script>

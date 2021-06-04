@@ -1,5 +1,66 @@
 <template>
 
+  <!-- <div>
+    <h2>Trending News</h2>
+  </div> -->
+
+  <VueSlickCarousel :arrows="true" :dots="false" v-bind="setting">
+      <div>
+        <Card_1></Card_1>
+      </div>
+      <div>
+        <Card_1></Card_1>
+      </div>
+      <div>
+        <Card_1></Card_1>
+      </div>
+      <div>
+        <Card_1></Card_1>
+      </div>
+  </VueSlickCarousel>
+</template>
+
+<script>
+  import VueSlickCarousel from 'vue-slick-carousel'
+  import 'vue-slick-carousel/dist/vue-slick-carousel.css'
+
+  // optional style for arrows & dots
+  import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
+  import Card_1 from './Card_1'
+
+  export default {
+    name: "MyComponent",
+    components: {
+      VueSlickCarousel,
+      Card_1
+    },
+    data() {
+      return {
+        setting: {
+
+          "dots": true,
+          "infinite": true,
+          "speed": 500,
+          "slidesToShow": 2,
+          "slidesToScroll": 2,
+          "initialSlide": 2,
+          "responsive": [{
+            "breakpoint": 1024,
+            "settings": {
+              "slidesToShow": 1,
+              "slidesToScroll": 1,
+              "infinite": true,
+              "dots": false
+            }
+          }, ]
+        }
+      };
+    },
+  };
+
+</script>
+
+<!-- <template>
       <v-row dense>
         <v-col
           v-for="card in cards"
@@ -21,7 +82,6 @@
         </v-col>
       </v-row>
 </template>
-
 <script>
   export default {
     data: () => ({
@@ -34,6 +94,4 @@
     }),
   }
 </script>
-
-
-
+-->
