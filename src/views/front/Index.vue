@@ -1,9 +1,10 @@
 <template>
-  <v-app>
-    
-    <FrontTopBar />
-    <LogoTopWrap />
-    <MenuDrawer />
+  <v-app>    
+    <header>
+      <FrontTopBar />
+      <LogoTopWrap />
+      <MenuDrawer />
+    </header>
     <LatestNews />
     <FrontFooter />
   </v-app>
@@ -27,6 +28,10 @@
 </script>
 <style>
 /* @import '../assets/css/style.css'; */
+.theme--light.v-application{
+  background-color: #fcfcfc;
+  color: #17222b;
+}
 .container{
   padding-bottom: 0;
   padding-top: 0;

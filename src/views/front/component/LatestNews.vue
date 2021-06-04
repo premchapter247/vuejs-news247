@@ -1,7 +1,7 @@
 <template>
     <v-container>
-        <v-row justify="center" class="border border-success">
-            <v-col cols="11" sm="10" md="10" lg="8" class="info rounded-xl">
+        <v-row justify="center">
+            <v-col cols="11" sm="10" md="10" lg="8">
                 <div>
                     <VueSlickCarousel
                         :arrows="true"
@@ -37,8 +37,12 @@
                         </VueSlickCarousel>
                 </div>
             </v-col>
-            <v-col cols="11" sm="10" md="10" lg="4" class="success rounded-xl">
+            <v-col cols="11" sm="10" md="10" lg="4">
                 <RightTabbing> </RightTabbing>
+            </v-col>
+
+            <v-col cols="11" sm="10" md="10" lg="12">
+                <FeatureNews> </FeatureNews>
             </v-col>
         </v-row>
     </v-container>
@@ -48,12 +52,13 @@
   import 'vue-slick-carousel/dist/vue-slick-carousel.css'
   import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
   import RightTabbing from './RightTabbing'
+  import FeatureNews from './FeatureNews'
 
   import axios from 'axios'
 
   export default {
     name: 'LatestNews',
-    components: { VueSlickCarousel, RightTabbing },
+    components: { VueSlickCarousel, RightTabbing, FeatureNews },
     data () {
       return {
           list: 'undefined',
