@@ -27,7 +27,7 @@
   }
 </script>
 <style>
-/* @import '../assets/css/style.css'; */
+@import '/assets/css/fonts.min.css';
 .theme--light.v-application{
   background-color: #fcfcfc;
   color: #17222b;
