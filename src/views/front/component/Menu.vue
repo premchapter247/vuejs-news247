@@ -23,37 +23,7 @@
                                 <a href="" class="sub-menu-link">Pages 3</a>
                             </li>
                         </ul>
-                    </li>
-                    <li class="nav-li">
-                        <a href="" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-li has-sub">
-                        <a href="" class="nav-link">Pages
-                            <v-icon small>
-                                mdi-chevron-down
-                            </v-icon>
-                        </a>
-                        <ul class="sub-menu-ul">
-                            <li class="sub-menu-li">
-                                <a href="" class="sub-menu-link">Pages 1</a>
-                            </li>
-                            <li class="sub-menu-li">
-                                <a href="" class="sub-menu-link">Pages 2</a>
-                            </li>
-                            <li class="sub-menu-li">
-                                <a href="" class="sub-menu-link">Pages 3</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-li">
-                        <a href="" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-li">
-                        <a href="" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-li">
-                        <a href="" class="nav-link">Home</a>
-                    </li>
+                    </li>                   
                 </ul>
             </nav>
         </v-container>
