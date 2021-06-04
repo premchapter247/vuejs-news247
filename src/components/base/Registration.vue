@@ -6,7 +6,7 @@
           class="
             v-card--material
             pa-5
-            my-md-16
+            my-md-6
             elevation-10
             v-card v-sheet
             v-card--material--has-heading
@@ -25,110 +25,128 @@
           <v-card-text>
             <ValidationObserver ref="observer" v-slot="{ invalid }">
               <v-form @submit.prevent="onSubmit">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  name="First name"
-                  rules="required|alpha|max:15"
-                >
-                  <v-text-field
-                    v-model="first_name"
-                    :error-messages="errors"
-                    label="First Name"
-                    :counter="15"
-                    type="text"
-                    required
-                  >
-                  </v-text-field>
-                </ValidationProvider>
+                <v-row>
+                  <v-col cols="12" sm="12" md="6">
+                    <ValidationProvider
+                      v-slot="{ errors }"
+                      name="First name"
+                      rules="required|alpha|max:15"
+                    >
+                      <v-text-field
+                        v-model="first_name"
+                        :error-messages="errors"
+                        label="First Name"
+                        :counter="15"
+                        type="text"
+                        required
+                      >
+                      </v-text-field>
+                    </ValidationProvider>
+                  </v-col>
 
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  name="Last name"
-                  rules="required|alpha|max:20"
-                >
-                  <v-text-field
-                    v-model="last_name"
-                    :error-messages="errors"
-                    label="Last Name"
-                    :counter="20"
-                    type="text"
-                    required
-                  >
-                  </v-text-field>
-                </ValidationProvider>
+                  <v-col cols="12" sm="12" md="6">
+                    <ValidationProvider
+                      v-slot="{ errors }"
+                      name="Last name"
+                      rules="required|alpha|max:20"
+                    >
+                      <v-text-field
+                        v-model="last_name"
+                        :error-messages="errors"
+                        label="Last Name"
+                        :counter="20"
+                        type="text"
+                        required
+                      >
+                      </v-text-field>
+                    </ValidationProvider>
+                  </v-col>
 
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  name="Phone number"
-                  rules="required|digits:10|customPhoneNumber"
-                >
-                  <v-text-field
-                    type="tel"
-                    v-model="phoneNumber"
-                    :counter="10"
-                    :error-messages="errors"
-                    label="Phone Number"
-                    required
-                  ></v-text-field>
-                </ValidationProvider>
+                  <v-col cols="12">
+                    <ValidationProvider
+                      v-slot="{ errors }"
+                      name="Phone number"
+                      rules="required|digits:10|customPhoneNumber"
+                    >
+                      <v-text-field
+                        type="tel"
+                        v-model="phoneNumber"
+                        :counter="10"
+                        :error-messages="errors"
+                        label="Phone Number"
+                        required
+                      ></v-text-field>
+                    </ValidationProvider>
+                  </v-col>
+                  <v-col cols="12">
+                    <ValidationProvider
+                      v-slot="{ errors }"
+                      name="Email"
+                      rules="required|email"
+                    >
+                      <v-text-field
+                        v-model="email"
+                        :error-messages="errors"
+                        label="Email"
+                        type="email"
+                        required
+                      >
+                      </v-text-field>
+                    </ValidationProvider>
+                  </v-col>
+                  <v-col cols="12">
+                    <ValidationProvider
+                      v-slot="{ errors }"
+                      name="Password"
+                      rules="required|confirmed:confirm_password"
+                      :balls="true"
+                    >
+                      <v-text-field
+                        v-model="password"
+                        :error-messages="errors"
+                        label="Password"
+                        name="password"
+                        ref="password"
+                        :counter="20"
+                        :type="showPassword ? 'text' : 'password'"
+                        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                        @click:append="showPassword = !showPassword"
+                        required
+                      >
+                      </v-text-field>
+                    </ValidationProvider>
+                  </v-col>
+                  <v-col cols="12">
+                    <ValidationProvider
+                      v-slot="{ errors }"
+                      name="Confirm password"
+                      rules="required|confirmPassword"
+                    >
+                      <v-text-field
+                        v-model="password_confirmation"
+                        :error-messages="errors"
+                        label="Confirm Password"
+                        :counter="20"
+                        :type="showConfirmPassword ? 'text' : 'password'"
+                        :append-icon="
+                          showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'
+                        "
+                        @click:append="
+                          showConfirmPassword = !showConfirmPassword
+                        "
+                      >
+                      </v-text-field>
+                    </ValidationProvider>
+                  </v-col>
 
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  name="Email"
-                  rules="required|email"
-                >
-                  <v-text-field
-                    v-model="email"
-                    :error-messages="errors"
-                    label="Email"
-                    type="email"
-                    required
-                  >
-                  </v-text-field>
-                </ValidationProvider>
-
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  name="Password"
-                  rules="required|customPassword|min:8"
-                  :balls="true"
-                >
-                  <v-text-field
-                    v-model="password"
-                    :error-messages="errors"
-                    label="Password"
-                    :counter="20"
-                    :type="showPassword ? 'text' : 'password'"
-                    :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                    @click:append="showPassword = !showPassword"
-                    required
-                  >
-                  </v-text-field>
-                </ValidationProvider>
-
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  name="Confirm password"
-                  rules="confirmPassword"
-                >
-                  <v-text-field
-                    v-model="confirm_password"
-                    :error-messages="errors"
-                    label="Confirm Password"
-                    :counter="20"
-                    :type="showConfirmPassword ? 'text' : 'password'"
-                    :append-icon="
-                      showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'
-                    "
-                    @click:append="showConfirmPassword = !showConfirmPassword"
-                  >
-                  </v-text-field>
-                </ValidationProvider>
-                <v-card-actions>
-                  <v-btn class="success" @click="onSubmit" :disabled="invalid"
-                    >Register</v-btn
-                  >
-                </v-card-actions>
+                  <v-col cols="12">
+                    <!-- <v-card-actions> -->
+                    <v-btn class="success" @click="onSubmit" :disabled="invalid"
+                      >Register</v-btn
+                    >
+                    <!-- </v-card-actions> -->
+                  </v-col>
+                </v-row>
               </v-form>
             </ValidationObserver>
           </v-card-text>
@@ -195,10 +213,11 @@ extend("customPhoneNumber", {
   },
 });
 
-var confirmedPassword= "is required.";
+var confirmedPassword = "is required.";
 extend("confirmPassword", {
   message: (field) => `The ${field} ${confirmedPassword}`,
   validate: (value) => {
+    // console.log(this.password + " " + value);
     if (value === this.password) {
       return true;
     } else {
@@ -252,7 +271,7 @@ export default {
     email: "",
     phoneNumber: null,
     password: "",
-    confirm_password: "",
+    password_confirmation: "",
   }),
 
   methods: {
@@ -268,7 +287,7 @@ export default {
           " " +
           this.password +
           " " +
-          this.confirm_password
+          this.password_confirmation
       );
       this.$refs.observer.validate();
       this.clear();
@@ -282,20 +301,22 @@ export default {
           if (response.data.token_type == "bearer") {
             const token = response.data.access_token;
             localStorage.setItem("user-token", token);
-            this.$router.push({ path: "/admin" });
+            this.$router.push({
+              path: "/admin",
+            });
           }
         });
     },
     clear() {
-      (this.showPassword = false),
-        (this.showConfirmPassword = false),
-        (this.first_name = ""),
-        (this.last_name = ""),
-        (this.email = ""),
-        (this.phoneNumber = null),
-        (this.password = ""),
-        (this.confirm_password = ""),
-        this.$refs.observer.reset();
+      this.showPassword = false;
+      this.showConfirmPassword = false;
+      this.first_name = "";
+      this.last_name = "";
+      this.email = "";
+      this.phoneNumber = null;
+      this.password = "";
+      this.confirm_password = "";
+      this.$refs.observer.reset();
     },
   },
 };
