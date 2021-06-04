@@ -8,11 +8,9 @@
                 <div class="topbar-slick-wrap">
                     <div>
                         <VueSlickCarousel :arrows="true">
-                            <div><a href="" draggable="false">Top 10 Best Movies of 2018 So Far: Great Movies To Watch Now</a></div>
-                            <div><a href="" draggable="false">Top 5 Best Web Series To Watch Now</a></div>
-                            <div><a href="" draggable="false">Top 247's Breaking News</a></div>
-                            <div><a href="" draggable="false">Khali fan's not taking dum in commenting</a></div>
-                            <div><a href="" draggable="false">KKR review on Radhe:Salman Khan's Film</a></div>
+                            <div v-for="trandinglist in trandinglists" :key="trandinglist.id">
+                                <a href="" draggable="false">{{ trandinglist.title }}</a>
+                            </div>
                         </VueSlickCarousel>
                     </div>
                 </div>
@@ -34,9 +32,23 @@ import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 
+import axios from 'axios'
+
 export default {
     name: 'TopBar',
     components: { VueSlickCarousel },
+    data () {
+      return { 
+          trandinglists: 'undefined',
+          }
+    },
+    mounted () {
+      axios.get('http://127.0.0.1:8000/api/tranding-list')
+        .then((resp) => {
+          this.trandinglists = resp.data.data
+          console.warn(resp.data.data)
+        })
+    },
 }
 </script>
 
