@@ -66,7 +66,7 @@
                     <v-btn class="success" @click="onSubmit" :disabled="invalid"
                       >Login</v-btn
                     >
-                    <a href="#" target="_blank"> Forget Password? </a>
+                    <a href="#" target="_blank" class="display-1"> Forget Password? </a>
                   </v-card-actions>
                 </v-divide>
               </v-form>
@@ -103,7 +103,7 @@ extend("min", {
 extend("regex", {
   ...regex,
   message:
-    "Password requires 1 of each of the following: uppercase letter, lowercase letter, number, special character.",
+    "Password is invalid",
 });
 
 extend("email", {
@@ -131,7 +131,7 @@ export default {
         )
         .then((response) => {
           if (response.data.token_type == "bearer") {
-          const token = response.data.access_token 
+          const token = response.data.access_token
           localStorage.setItem('user-token', token)
           this.$router.push({ path: "/admin" });
           }

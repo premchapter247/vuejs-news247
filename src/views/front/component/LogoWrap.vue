@@ -1,4 +1,4 @@
-<template>  
+<template>
     <v-container>
         <div>Logo</div>
     </v-container>
