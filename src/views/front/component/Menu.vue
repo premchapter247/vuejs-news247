@@ -12,15 +12,10 @@
                                 mdi-chevron-down
                             </v-icon>
                         </a>
-                        <ul class="sub-menu-ul">
-                            <li class="sub-menu-li">
-                                <a href="" class="sub-menu-link">Pages 1</a>
-                            </li>
-                            <li class="sub-menu-li">
-                                <a href="" class="sub-menu-link">Pages 2</a>
-                            </li>
-                            <li class="sub-menu-li">
-                                <a href="" class="sub-menu-link">Pages 3</a>
+                        <ul class="sub-menu-ul" >
+                            <li class="sub-menu-li" v-for="category in categorys"
+                                :key="category.id">
+                                <a href="" class="sub-menu-link">{{category.title}}</a>
                             </li>
                         </ul>
                     </li>                   
@@ -30,8 +25,22 @@
     </section>
 </template>
 <script>
+import axios from 'axios'
+
 export default {
-    name: 'MenuBar' 
+    name: 'MenuBar',
+    data () {
+      return { 
+          categorys: 'undefined',
+          }
+    },
+    mounted () {
+      axios.get('http://127.0.0.1:8000/api/categories')
+        .then((resp) => {
+          this.categorys = resp.data.data
+          console.warn(resp.data.data)
+        })
+    },
 }
 </script>
 <style scoped>
