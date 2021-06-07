@@ -1,66 +1,76 @@
 <template>
   <div>
-    <v-container>
-      <v-row justify="center">
-        <v-col cols="12" lg="8">
-          <div>
-            <VueSlickCarousel
-              :arrows="true"
-              :fade="true"
-              ref="c1"
-              :asNavFor="$refs.c2"
-              :focusOnSelect="true"
-            >
-              <div v-for="item in list" :key="item.id" class="latest-news-carousel">
-                <img
-                  :src="'http://127.0.0.1:8000/image/' + item.image" class="slick-img-responsive" draggable="false"
-                >
-              </div>
-            </VueSlickCarousel>
-            <VueSlickCarousel class="slick-thumb-arrow"
-              :centerMode="true"
-              :arrows="true"
-              ref="c2"
-              :asNavFor="$refs.c1"
-              :slidesToShow="8"
-              :focusOnSelect="true"
-            >
-              <div v-for="item in list" :key="item.id" class="latest-news-thumb">
-                <img
-                  :src="'http://127.0.0.1:8000/image/' + item.thumbnail" class="slick-img-responsive" draggable="false"
-                >
-              </div>
-            </VueSlickCarousel>
-          </div>
-        </v-col>
-        <v-col cols="12" lg="4">
-          <PostListView> </PostListView>
-        </v-col>
-      </v-row>
-    </v-container>
-    <v-container>
-      <v-row>
-        <v-col cols="12">
-          <FeatureNews> </FeatureNews>
-        </v-col>
-      </v-row>
-    </v-container>
+    <section class="section">
+      <v-container>
+        <v-row justify="center">
+          <v-col cols="12" lg="8">
+            <div>
+              <VueSlickCarousel class="mb-3"
+                :arrows="false"
+                :fade="true"
+                ref="c1"
+                :asNavFor="$refs.c2"
+                :focusOnSelect="true"
+              >
+                <div v-for="item in list" :key="item.id" class="latest-news-carousel">
+                  <img
+                    :src="'http://127.0.0.1:8000/image/' + item.image" class="img-responsive" draggable="false"
+                  >
+                  <div class="post-content-wrap">
+                    
+                  </div>
+                </div>
+              </VueSlickCarousel>
+              <VueSlickCarousel class="slick-thumb-arrow"
+                :centerMode="true"
+                :arrows="true"
+                ref="c2"
+                :asNavFor="$refs.c1"
+                :slidesToShow="8"
+                :focusOnSelect="true"
+              >
+                <div v-for="item in list" :key="item.id" class="latest-news-thumb">
+                  <img
+                    :src="'http://127.0.0.1:8000/image/' + item.thumbnail" class="img-responsive" draggable="false"
+                  >
+                </div>
+              </VueSlickCarousel>
+            </div>
+          </v-col>
+          <v-col cols="12" lg="4">
+            <PostListView> </PostListView>
+          </v-col>
+        </v-row>
+      </v-container>
+    </section>
 
-    <v-container>
-      <v-row>
-        <v-col cols="12" md="8">
-          <TranddingNews> </TranddingNews>
-          <v-row>
-            <v-col cols="12" md="8" lg="6"> <TranddingListViewLeft> </TranddingListViewLeft> </v-col>
-            <v-col cols="12" md="8" lg="6"> <TranddingListViewRight> </TranddingListViewRight> </v-col>
-          </v-row>
-        </v-col>
+    <section class="section">
+      <v-container>
+        <v-row>
+          <v-col cols="12">
+            <FeatureNews> </FeatureNews>
+          </v-col>
+        </v-row>
+      </v-container>
+    </section>
 
-        <v-col cols="12" md="4">
-          <h1>Section</h1>
-        </v-col>
-      </v-row>
-    </v-container>
+    <section class="section">
+      <v-container>
+        <v-row>
+          <v-col cols="12" md="8">
+            <TranddingNews> </TranddingNews>
+            <v-row>
+              <v-col cols="12" md="8" lg="6"> <TranddingListViewLeft> </TranddingListViewLeft> </v-col>
+              <v-col cols="12" md="8" lg="6"> <TranddingListViewRight> </TranddingListViewRight> </v-col>
+            </v-row>
+          </v-col>
+
+          <v-col cols="12" md="4">
+            <h1>Section</h1>
+          </v-col>
+        </v-row>
+      </v-container>
+    </section>
   </div>
 </template>
 <script>
@@ -105,13 +115,6 @@ export default {
 .latest-news-carousel{
   height: 500px;
   position: relative;
-}
-.slick-img-responsive{
-  width: 100%;
-  height: 100%;
-  transition: all .3s;
-  object-fit: cover;
-  overflow: hidden;
 }
 .latest-news-thumb{
   height: 60px;

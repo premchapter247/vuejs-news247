@@ -1,8 +1,8 @@
 <template>
-  <div class="mx-2">
+  <div class="feature-card-link">
     <div class="post_img gradient1">
       <a href="#"
-        ><v-img :src="'http://127.0.0.1:8000/image/' + src" alt="thumb"
+        ><img :src="'http://127.0.0.1:8000/image/' + src" alt="thumb" class="img-responsive"
       /></a>
     </div>
     <div class="single_post_text">
@@ -111,5 +111,9 @@ a:hover {
   font-size: 16px;
   line-height: 21px;
   font-weight: 700;
+}
+.feature-card-link{
+  display: block;
+  position: relative;
 }
 </style>

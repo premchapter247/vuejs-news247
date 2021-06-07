@@ -3,8 +3,7 @@
     <div>
       <h2 class="widget-title">Feature News</h2>
     </div>
-
-    <VueSlickCarousel :arrows="true" :dots="false" v-bind="setting">
+    <VueSlickCarousel :arrows="true" :dots="false" v-bind="setting" class="slick-arrow-top">
       <div v-for="list in lists" :key="list.id">
         <CardImage
           :title="list.title"
@@ -93,9 +92,5 @@ export default {
 </script>
 
 <style scoped>
-.widget-title {
-  font-size: 24px;
-  margin-bottom: 20px;
-  font-weight: 500;
-}
+
 </style>
