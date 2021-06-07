@@ -1,22 +1,22 @@
 <template>
   <div>
     <div class="mx-2">
-      <v-img :src="src" class="white--text align-end">
+      <v-img :src="'http://127.0.0.1:8000/image/' + src" class="white--text align-end">
         <v-badge left color="red" class="tranding"> </v-badge>
       </v-img>
 
       <div class="py-5">
         <div class="pb-10px">
           <a href="#" class="post_type1 f-500">{{ category }}</a>
-          <a href="#" class="post_type2"> {{ date }} </a>
+          <a href="#" class="post_type2"> {{ date }}</a>
         </div>
 
         <div class="pb-0">
           <div class="mb-2">
-            <a href="#" class="post_type3"> {{ single_post }} </a>
+            <a href="#" class="post_type3"> {{ title }} </a>
           </div>
           <p class="post-p">
-            {{ description }}
+            {{ short_desc }}
           </p>
         </div>
       </div>
@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  props: ["title", "src", "category", "date", "single_post", "description"],
+  props: ["title", "src", "category", "date", "short_desc", "description"],
 };
 </script>
 
