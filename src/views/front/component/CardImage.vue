@@ -1,27 +1,18 @@
 <template>
-  <div class="mx-2">
+  <div>
     <div class="post_img gradient1">
       <a href="#"><v-img :src="src_path" alt="thumb" /></a>
     </div>
     <div class="single_post_text">
       <div class="meta5">
-        <a href="#">{{ category }}</a
-        ><a href="#"> {{ date }} </a>
+        <a href="#">TECHNOLOGY</a><a href="#">March 26, 2020</a>
       </div>
       <h4>
-        <a href="#"> {{ description }} </a>
+        <a href="#">Best garden wing supplies for the horticu ltural</a>
       </h4>
     </div>
-    <h6 class="red--text">{{ src_path }}</h6>
   </div>
 </template>
-
-<script>
-export default {
-  name: "CardImage",
-  props: ["src_path", "category", "date", "description"],
-};
-</script>
 
 <style scoped>
 .post_img {
@@ -56,7 +47,7 @@ export default {
   z-index: 2;
   line-height: 17px;
   margin-bottom: 5px;
-  color: black;
+  color: #fff;
 }
 
 a {

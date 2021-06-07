@@ -28,6 +28,9 @@
 </script>
 <style>
 @import '/assets/css/fonts.min.css';
+a{
+  text-decoration: none;
+}
 .theme--light.v-application{
   background-color: #fcfcfc;
   color: #17222b;
@@ -41,5 +44,19 @@
 }
 .row{
   margin-top: 0;
+}
+.slick-arrow-top .slick-prev, .slick-arrow-top .slick-next,.slick-arrow-top .slick-prev:before,.slick-arrow-top .slick-next:before{
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+}
+.slick-arrow-top .slick-prev {
+    left: auto;
+    right: 35px;
+    top: -20px;
+}
+.slick-arrow-top .slick-next {
+    right: 0;
+    top: -20px;
 }
 </style>
