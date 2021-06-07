@@ -6,29 +6,29 @@
           <div>
             <VueSlickCarousel class="slick-arrow-top"
               :arrows="true"
+              :fade="true"
               ref="c1"
               :asNavFor="$refs.c2"
               :focusOnSelect="true"
             >
-              <div v-for="item in list" :key="item.id">
-                <v-img
-                  :src="'http://127.0.0.1:8000/image/' + item.image"
-                ></v-img>
+              <div v-for="item in list" :key="item.id" class="latest-news-carousel">
+                <img
+                  :src="'http://127.0.0.1:8000/image/' + item.image" class="slick-img-responsive" draggable="false"
+                >
               </div>
             </VueSlickCarousel>
-            <VueSlickCarousel
+            <VueSlickCarousel class="slick-thumb-arrow"
+              :centerMode="true"
               :arrows="true"
               ref="c2"
               :asNavFor="$refs.c1"
-              :slidesToShow="4"
+              :slidesToShow="8"
               :focusOnSelect="true"
             >
-              <div v-for="item in list" :key="item.id">
-                <v-img
-                  max-height="150"
-                  max-width="250"
-                  :src="'http://127.0.0.1:8000/image/' + item.thumbnail"
-                ></v-img>
+              <div v-for="item in list" :key="item.id" class="latest-news-thumb">
+                <img
+                  :src="'http://127.0.0.1:8000/image/' + item.thumbnail" class="slick-img-responsive" draggable="false"
+                >
               </div>
             </VueSlickCarousel>
           </div>
@@ -98,3 +98,19 @@ export default {
   },
 };
 </script>
+<style scoped>
+.latest-news-carousel{
+  height: 500px;
+  position: relative;
+}
+.slick-img-responsive{
+  width: 100%;
+  height: 100%;
+  transition: all .3s;
+  object-fit: cover;
+  overflow: hidden;
+}
+.latest-news-thumb{
+  height: 60px;
+}
+</style>

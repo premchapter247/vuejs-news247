@@ -38,6 +38,7 @@ a{
 .container{
   padding-bottom: 0;
   padding-top: 0;
+  max-width: 1140px;
 }
 .white_bg {
     background: #fff!important;
@@ -58,5 +59,18 @@ a{
 .slick-arrow-top .slick-next {
     right: 0;
     top: -20px;
+}
+.slick-thumb-arrow .slick-prev, .slick-thumb-arrow .slick-next,.slick-thumb-arrow .slick-prev:before,.slick-thumb-arrow .slick-next:before{
+  height: calc(100% - 2px);
+  line-height: 1;
+  top: 46%;
+  width: 25px;
+}
+.slick-thumb-arrow .slick-prev{
+  left: 0;
+  z-index: 9;
+}
+.slick-thumb-arrow .slick-next{
+  right: 0;
 }
 </style>

@@ -79,14 +79,14 @@ export default {
         margin-right: auto;
         padding: 12px;
         font-size: 14px;
-        line-height: 17px;
+        line-height: 14px;
         padding-right: 60px;
     }
     .topbar-slick-wrap a{
         color: #17222b;
         opacity: .85;
         display: block;
-        word-break: break-word;
+        overflow: hidden;
         white-space: nowrap;
         text-decoration: none;
     }
