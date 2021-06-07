@@ -38,15 +38,6 @@
         </v-col>
       </v-row>
     </v-container>
-
-                        <div v-for="item in list"
-                            :key="item.id">
-                            <v-img
-                            max-height="150"
-                            max-width="250"
-                            :src="'http://127.0.0.1:8000/image/'+ item.thumbnail"
-                            ></v-img>
-                        </div>
     <v-container>
       <v-row>
         <v-col cols="12">
