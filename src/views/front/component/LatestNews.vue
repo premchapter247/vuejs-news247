@@ -30,7 +30,7 @@
                             <v-img
                             max-height="150"
                             max-width="250"
-                            :src="'http://127.0.0.1:8000/image/'+ item.image"
+                            :src="'http://127.0.0.1:8000/image/'+ item.thumbnail"
                             ></v-img>
                         </div>
 
