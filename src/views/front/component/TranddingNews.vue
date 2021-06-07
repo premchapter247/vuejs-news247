@@ -17,7 +17,6 @@
       </div>
     </VueSlickCarousel>
     <div class="border_black"></div>
-    <div class="space-30"></div>
   </div>
 </template>
 
@@ -112,7 +111,7 @@ export default {
 }
 
 .border_black {
-  border-top: 1px dashed #dcdedf;
+  border-top: 1px dashed black;
 }
 
 .space-30 {
@@ -120,7 +119,3 @@ export default {
 }
 </style>
 
-<!--
-
-
--->

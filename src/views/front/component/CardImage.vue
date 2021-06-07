@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="mx-2">
     <div class="post_img gradient1">
-      <a href="#"><v-img :src="src_path" alt="thumb" /></a>
+      <a href="#"><v-img src="./NewsPrk_files/feature3.3f5ab883.jpg" alt="thumb" /></a>
     </div>
     <div class="single_post_text">
       <div class="meta5">

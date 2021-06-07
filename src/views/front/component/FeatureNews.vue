@@ -8,6 +8,18 @@
       <div>
         <CardImage></CardImage>
       </div>
+      <div>
+        <CardImage></CardImage>
+      </div>
+      <div>
+        <CardImage></CardImage>
+      </div>
+      <div>
+        <CardImage></CardImage>
+      </div>
+      <div>
+        <CardImage></CardImage>
+      </div>
 
     </VueSlickCarousel>
     <div class="border_black"></div>

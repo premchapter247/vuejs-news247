@@ -4,7 +4,7 @@
       <v-row justify="center">
         <v-col cols="12" lg="8">
           <div>
-            <VueSlickCarousel class="slick-arrow-top"
+            <VueSlickCarousel
               :arrows="true"
               ref="c1"
               :asNavFor="$refs.c2"
@@ -33,7 +33,7 @@
             </VueSlickCarousel>
           </div>
         </v-col>
-        <v-col cols="12" md="4">
+        <v-col cols="12" lg="4">
           <PostListView> </PostListView>
         </v-col>
       </v-row>
@@ -51,8 +51,8 @@
         <v-col cols="12" md="8">
           <TranddingNews> </TranddingNews>
           <v-row>
-            <v-col cols="6"> </v-col>
-            <v-col cols="6"></v-col>
+            <v-col cols="12" md="8" lg="6"> <TranddingListViewLeft> </TranddingListViewLeft> </v-col>
+            <v-col cols="12" md="8" lg="6"> <TranddingListViewRight> </TranddingListViewRight> </v-col>
           </v-row>
         </v-col>
 
@@ -70,7 +70,8 @@ import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 import PostListView from "./PostListView";
 import TranddingNews from "./TranddingNews";
 import FeatureNews from "./FeatureNews";
-import LeftImage from "./LeftImage.vue";
+import TranddingListViewLeft from "./TranddingListViewLeft";
+import TranddingListViewRight from "./TranddingListViewRight";
 
 import axios from "axios";
 
@@ -81,7 +82,9 @@ export default {
     PostListView,
     TranddingNews,
     FeatureNews,
-    LeftImage,
+    TranddingListViewLeft,
+    TranddingListViewRight
+
   },
   data() {
     return {
