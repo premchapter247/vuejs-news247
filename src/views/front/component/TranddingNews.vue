@@ -8,16 +8,15 @@
       <div v-for="card in cards" :key="card.id">
         <Card
           :title="card.title"
-          :src="card.src"
-          :category="card.category"
-          :date="card.date"
-          :single_post="card.single_post"
+          :src="card.image"
+          :category="card.category_id"
+          :date="card.created_at"
+          :short_desc="card.shortDesc"
           :description="card.description"
         ></Card>
       </div>
     </VueSlickCarousel>
     <div class="border_black"></div>
-    <div class="space-30"></div>
   </div>
 </template>
 
@@ -27,6 +26,8 @@ import "vue-slick-carousel/dist/vue-slick-carousel.css";
 import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 import Card from "./Card";
 
+import axios from "axios";
+
 export default {
   name: "MyComponent",
   components: {
@@ -35,50 +36,7 @@ export default {
   },
   data() {
     return {
-      cards: [
-        {
-          id: 101,
-          title: "Pre-fab homes",
-          src: "./NewsPrk_files/trendbig1.cef620c6.jpg",
-          category: "TECHNOLOGY",
-          date: "March 26, 2021",
-          single_post:
-            "Japan’s virus success has puzzled the world. Is its luck running out?",
-          description:
-            "The property, complete with 30-seat screening from room, a 100-seat amphitheater and a swimming pond with sandy shower…",
-        },
-        {
-          id: 102,
-          title: "Pre-fab homes",
-          src: "./NewsPrk_files/trendbig2.17b0470b.jpg",
-          category: "ENTERTAINMENT",
-          date: "March 26, 2021",
-          single_post: "There may be no consoles in the future ea exec says",
-          description:
-            "The property, complete with 30-seat screening from room, a 100-seat amphitheater and a swimming pond with sandy shower…",
-        },
-        {
-          id: 103,
-          title: "Pre-fab homes",
-          src: "./NewsPrk_files/trendbig2.17b0470b.jpg",
-          category: "SPORTS",
-          date: "March 26, 2021",
-          single_post:
-            "Japan’s virus success has puzzled the world. Is its luck running out?",
-          description:
-            "The property, complete with 30-seat screening from room, a 100-seat amphitheater and a swimming pond with sandy shower…",
-        },
-        {
-          id: 104,
-          title: "Pre-fab homes",
-          src: "./NewsPrk_files/trendbig1.cef620c6.jpg",
-          category: "TECHNOLOGY",
-          date: "March 26, 2021",
-          single_post: "There may be no consoles in the future ea exec says",
-          description:
-            "The property, complete with 30-seat screening from room, a 100-seat amphitheater and a swimming pond with sandy shower…",
-        },
-      ],
+      cards: "undefined",
 
       setting: {
         dots: true,
@@ -101,6 +59,14 @@ export default {
       },
     };
   },
+  mounted() {
+    axios
+      .post("http://127.0.0.1:8000/api/post/list", { start: 0, total: 10 })
+      .then((resp) => {
+        this.cards = resp.data.data;
+        console.warn(resp.data.data);
+      });
+  },
 };
 </script>
 
@@ -112,7 +78,7 @@ export default {
 }
 
 .border_black {
-  border-top: 1px dashed #dcdedf;
+  border-top: 1px dashed black;
 }
 
 .space-30 {
@@ -120,7 +86,3 @@ export default {
 }
 </style>
 
-<!--
-
-
--->

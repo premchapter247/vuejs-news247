@@ -1,18 +1,27 @@
 <template>
-  <div>
+  <div class="mx-2">
     <div class="post_img gradient1">
-      <a href="#"><v-img :src="src_path" alt="thumb" /></a>
+      <a href="#"
+        ><v-img :src="'http://127.0.0.1:8000/image/' + src" alt="thumb"
+      /></a>
     </div>
     <div class="single_post_text">
       <div class="meta5">
-        <a href="#">TECHNOLOGY</a><a href="#">March 26, 2020</a>
+        <a href="#">{{ category }}</a
+        ><a href="#">{{ date }}</a>
       </div>
       <h4>
-        <a href="#">Best garden wing supplies for the horticu ltural</a>
+        <a href="#">{{ title }}</a>
       </h4>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: ["title", "src", "category", "date", "short_desc", "description"],
+};
+</script>
 
 <style scoped>
 .post_img {

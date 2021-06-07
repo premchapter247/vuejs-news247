@@ -5,6 +5,25 @@
     </div>
 
     <VueSlickCarousel :arrows="true" :dots="false" v-bind="setting">
+      <div v-for="list in lists" :key="list.id">
+        <CardImage
+          :title="list.title"
+          :src="list.image"
+          :category="list.category_id"
+          :date="list.created_at"
+          :short_desc="list.shortDesc"
+          :description="list.description"
+        ></CardImage>
+      </div>
+      <div>
+        <CardImage></CardImage>
+      </div>
+      <div>
+        <CardImage></CardImage>
+      </div>
+      <div>
+        <CardImage></CardImage>
+      </div>
       <div>
         <CardImage></CardImage>
       </div>
@@ -21,6 +40,8 @@ import "vue-slick-carousel/dist/vue-slick-carousel.css";
 import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 import CardImage from "./CardImage.vue";
 
+import axios from "axios";
+
 export default {
   name: "MyComponent",
   components: {
@@ -29,6 +50,8 @@ export default {
   },
   data() {
     return {
+      lists: "undefined",
+
       setting: {
         dots: true,
         infinite: true,
@@ -57,6 +80,14 @@ export default {
         ],
       },
     };
+  },
+  mounted() {
+    axios
+      .post("http://127.0.0.1:8000/api/post/list", { start: 0, total: 10 })
+      .then((resp) => {
+        this.lists = resp.data.data;
+        console.warn(resp.data.data);
+      });
   },
 };
 </script>
