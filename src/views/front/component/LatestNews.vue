@@ -51,7 +51,7 @@
         <v-col cols="12" md="8">
           <TranddingNews> </TranddingNews>
           <v-row>
-            <v-col cols="6"></v-col>
+            <v-col cols="6"> </v-col>
             <v-col cols="6"></v-col>
           </v-row>
         </v-col>
@@ -70,13 +70,19 @@ import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 import PostListView from "./PostListView";
 import TranddingNews from "./TranddingNews";
 import FeatureNews from "./FeatureNews";
-
+import LeftImage from "./LeftImage.vue";
 
 import axios from "axios";
 
 export default {
   name: "LatestNews",
-  components: { VueSlickCarousel, PostListView, TranddingNews, FeatureNews },
+  components: {
+    VueSlickCarousel,
+    PostListView,
+    TranddingNews,
+    FeatureNews,
+    LeftImage,
+  },
   data() {
     return {
       list: "undefined",
