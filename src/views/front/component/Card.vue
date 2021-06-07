@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  props: ["title", "src", "category", "date", "single_post", "description"],
+  props: ["src", "category", "date", "single_post", "description"],
 };
 </script>
 

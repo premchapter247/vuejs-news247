@@ -1,20 +1,27 @@
 <template>
-  <div>
+  <div class="mx-2">
     <div class="post_img gradient1">
-      <a href="#"
-        ><img src="./NewsPrk_files/feature2.be97b50f.jpg" alt="thumb"
-      /></a>
+      <a href="#"><v-img src="./NewsPrk_files/feature4.e2e49bfc.jpg" alt="thumb" /></a>
     </div>
     <div class="single_post_text">
       <div class="meta5">
-        <a href="#">TECHNOLOGY</a><a href="#">March 26, 2020</a>
+        <a href="#">{{ category }}</a
+        ><a href="#"> {{ date }} </a>
       </div>
       <h4>
-        <a href="#">Best garden wing supplies for the horticu ltural</a>
+        <a href="#"> {{ description }} </a>
       </h4>
     </div>
+    <h6 class="red--text">{{ src_path }}</h6>
   </div>
 </template>
+
+<script>
+export default {
+  name: "CardImage",
+  props: ["src_path", "category", "date", "description"],
+};
+</script>
 
 <style scoped>
 .post_img {
@@ -49,7 +56,7 @@
   z-index: 2;
   line-height: 17px;
   margin-bottom: 5px;
-  color: #fff;
+  color: black;
 }
 
 a {

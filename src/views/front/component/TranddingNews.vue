@@ -5,7 +5,7 @@
     </div>
 
     <VueSlickCarousel :arrows="true" :dots="false" v-bind="setting">
-      <div v-for="card in cards" :key="card.id">
+      <div v-for="card in cards" :key="card.id">  
         <Card
           :title="card.title"
           :src="card.src"
