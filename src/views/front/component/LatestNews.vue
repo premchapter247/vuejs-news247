@@ -4,7 +4,7 @@
       <v-row justify="center">
         <v-col cols="12" lg="8">
           <div>
-            <VueSlickCarousel
+            <VueSlickCarousel class="slick-arrow-top"
               :arrows="true"
               ref="c1"
               :asNavFor="$refs.c2"
