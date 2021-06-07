@@ -38,7 +38,7 @@ export default {
     name: 'TopBar',
     components: { VueSlickCarousel },
     data () {
-      return { 
+      return {
           trandinglists: 'undefined',
           }
     },
@@ -79,7 +79,7 @@ export default {
         margin-right: auto;
         padding: 12px;
         font-size: 14px;
-        line-height: 17px;        
+        line-height: 17px;
         padding-right: 60px;
     }
     .topbar-slick-wrap a{
