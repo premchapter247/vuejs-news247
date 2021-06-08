@@ -1,8 +1,10 @@
 <template>
   <div>
     <div>
-      <h2 class="widget-title">Most View</h2>
+      <h2 class="widget-title" style="color: black">Most View</h2>
     </div>
+
+
 
     <VueSlickCarousel
       :arrows="true"
