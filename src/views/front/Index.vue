@@ -94,4 +94,72 @@ a{
   object-fit: cover;
   overflow: hidden;
 }
+.post-dark-overlay:after {
+    position: absolute;
+    content: "";
+    height: 60%;
+    width: 100%;
+    background: linear-gradient(
+0deg
+,rgba(0,0,0,.7),transparent);
+    left: 0;
+    bottom: 0;
+}
+.post-content-wrap{
+    position: absolute;
+    bottom: 0;
+    z-index: 9;
+    width: 100%;
+}
+.latest-news-carousel .post-content-wrap{
+  padding: 40px;
+}
+.post-card-metas{
+  display: flex;
+  flex-wrap: wrap;
+}
+.post-card-metas a{
+  font-size: 14px;
+  text-transform: capitalize;
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  display: inline-block;
+}
+.latest-news-carousel .post-card-metas a{
+  line-height: 36px;
+  font-weight: 700;
+}
+.post-card-metas .post-card-category{
+  text-transform: uppercase;
+}
+.post-card-date{
+  margin-left: 20px;
+  position: relative;
+}
+.post-card-date:before{
+    position: absolute;
+    content: "/";
+    height: 20px;
+    width: 10px;
+    left: -16px;
+    top: 50%;
+    margin-top: -10px;
+    line-height: 20px;
+    text-align: center;
+}
+.post-card-title{
+  color: #fff !important;
+  font-size: 30px;
+  line-height: 36px;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 10px;
+}
+.post-p{
+  font-size: 15px;
+  line-height: 21px;
+  font-weight: 400;
+  color: #fff;
+}
 </style>

@@ -12,12 +12,19 @@
                 :asNavFor="$refs.c2"
                 :focusOnSelect="true"
               >
-                <div v-for="item in list" :key="item.id" class="latest-news-carousel">
+                <div v-for="item in list" :key="item.id" class="latest-news-carousel post-dark-overlay">
                   <img
                     :src="'http://127.0.0.1:8000/image/' + item.image" class="img-responsive" draggable="false"
                   >
                   <div class="post-content-wrap">
-                    
+                    <div class="post-card-metas">
+                      <a href="" class="post-card-category">technology</a>
+                      <a href="" class="post-card-date">June 8, 2021</a>
+                    </div>
+                    <a href="" class="post-card-title">
+                      Copa America: Luis Suarez from devastated US America
+                    </a>
+                    <p class="post-p">The property, complete with 30-seat screening from room, a 100-seat amphitheater and a swimming pond with sandy shower…</p>
                   </div>
                 </div>
               </VueSlickCarousel>
