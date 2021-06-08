@@ -8,7 +8,7 @@
     <div class="single_post_text">
       <div class="meta5">
         <a href="#">{{ category }}</a
-        ><a href="#">{{ date }}</a>
+        ><a href="#">{{ moment(date).format("MMMM D, YYYY") }}</a>
       </div>
       <h4>
         <a href="#">{{ title }}</a>
@@ -18,7 +18,14 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
+  data() {
+    return {
+      moment: moment,
+    };
+  },
   props: ["title", "src", "category", "date", "short_desc", "description"],
 };
 </script>
