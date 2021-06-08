@@ -11,7 +11,7 @@
       class="slick-arrow-top"
     >
       <div>
-        <ul class="post-list-view" >
+        <ul class="post-list-view">
           <!-- loop -->
           <li>
             <a href="#" class="post-list-view-link">
@@ -29,6 +29,7 @@
                   Copa America: Luis Suarez from devastated US
                 </h4>
               </div>
+              <h2>1</h2>
             </a>
           </li>
           <!-- loop -->
@@ -48,6 +49,7 @@
                   Copa America: Luis Suarez from devastated US
                 </h4>
               </div>
+              <h2>2</h2>
             </a>
           </li>
           <!-- loop -->
@@ -67,6 +69,7 @@
                   Copa America: Luis Suarez from devastated US
                 </h4>
               </div>
+              <h2>3</h2>
             </a>
           </li>
           <!-- loop -->
@@ -86,6 +89,7 @@
                   Copa America: Luis Suarez from devastated US
                 </h4>
               </div>
+              <h2>4</h2>
             </a>
           </li>
           <!-- loop -->
@@ -105,6 +109,7 @@
                   Copa America: Luis Suarez from devastated US
                 </h4>
               </div>
+              <h2>5</h2>
             </a>
           </li>
           <!-- loop -->
@@ -124,6 +129,7 @@
                   Copa America: Luis Suarez from devastated US
                 </h4>
               </div>
+              <h2>6</h2>
             </a>
           </li>
           <!-- loop -->
@@ -149,6 +155,7 @@
                   Copa America: Luis Suarez from devastated US
                 </h4>
               </div>
+              <h2>7</h2>
             </a>
           </li>
           <!-- loop -->
@@ -168,6 +175,7 @@
                   Copa America: Luis Suarez from devastated US
                 </h4>
               </div>
+              <h2>8</h2>
             </a>
           </li>
           <!-- loop -->
@@ -187,6 +195,7 @@
                   Copa America: Luis Suarez from devastated US
                 </h4>
               </div>
+              <h2>9</h2>
             </a>
           </li>
           <!-- loop -->
@@ -206,6 +215,7 @@
                   Copa America: Luis Suarez from devastated US
                 </h4>
               </div>
+              <h2>10</h2>
             </a>
           </li>
           <!-- loop -->
@@ -225,6 +235,7 @@
                   Copa America: Luis Suarez from devastated US
                 </h4>
               </div>
+              <h2>11</h2>
             </a>
           </li>
           <!-- loop -->
@@ -244,6 +255,7 @@
                   Copa America: Luis Suarez from devastated US
                 </h4>
               </div>
+              <h2>12</h2>
             </a>
           </li>
           <!-- loop -->
@@ -271,7 +283,7 @@ export default {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
-        initialSlide: 1,
+        initialSlide: 2,
         responsive: [
           {
             breakpoint: 1024,
@@ -314,6 +326,7 @@ export default {
   color: #17222b;
   align-items: center;
 }
+
 .list-img-wrap {
   height: 77px;
   width: 100px;
@@ -374,4 +387,12 @@ export default {
   opacity: 0.3;
   text-align: center;
 }
+
+h2{
+    line-height: 50px;
+    color: #ced0d2;
+    font-size: 36px;
+    font-weight: 500;
+}
+
 </style>

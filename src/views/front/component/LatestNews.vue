@@ -5,23 +5,29 @@
         <v-row justify="center">
           <v-col cols="12" lg="8">
             <div>
-              <VueSlickCarousel class="mb-3"
+              <VueSlickCarousel
+                class="mb-3"
                 :arrows="false"
                 :fade="true"
                 ref="c1"
                 :asNavFor="$refs.c2"
                 :focusOnSelect="true"
               >
-                <div v-for="item in list" :key="item.id" class="latest-news-carousel">
+                <div
+                  v-for="item in list"
+                  :key="item.id"
+                  class="latest-news-carousel"
+                >
                   <img
-                    :src="'http://127.0.0.1:8000/image/' + item.image" class="img-responsive" draggable="false"
-                  >
-                  <div class="post-content-wrap">
-
-                  </div>
+                    :src="'http://127.0.0.1:8000/image/' + item.image"
+                    class="img-responsive"
+                    draggable="false"
+                  />
+                  <div class="post-content-wrap"></div>
                 </div>
               </VueSlickCarousel>
-              <VueSlickCarousel class="slick-thumb-arrow"
+              <VueSlickCarousel
+                class="slick-thumb-arrow"
                 :centerMode="true"
                 :arrows="true"
                 ref="c2"
@@ -29,10 +35,16 @@
                 :slidesToShow="8"
                 :focusOnSelect="true"
               >
-                <div v-for="item in list" :key="item.id" class="latest-news-thumb">
+                <div
+                  v-for="item in list"
+                  :key="item.id"
+                  class="latest-news-thumb"
+                >
                   <img
-                    :src="'http://127.0.0.1:8000/image/' + item.thumbnail" class="img-responsive" draggable="false"
-                  >
+                    :src="'http://127.0.0.1:8000/image/' + item.thumbnail"
+                    class="img-responsive"
+                    draggable="false"
+                  />
                 </div>
               </VueSlickCarousel>
             </div>
@@ -75,7 +87,6 @@ import FeatureNews from "./FeatureNews";
 import TranddingListViewLeft from "./TranddingListViewLeft";
 import TranddingListViewRight from "./TranddingListViewRight";
 import MostView from "./MostView";
-
 import axios from "axios";
 
 export default {
@@ -105,11 +116,14 @@ export default {
 };
 </script>
 <style scoped>
-.latest-news-carousel{
+.latest-news-carousel {
   height: 500px;
   position: relative;
 }
-.latest-news-thumb{
+.latest-news-thumb {
   height: 60px;
+}
+.primay_bg {
+  background: #17222b;
 }
 </style>
