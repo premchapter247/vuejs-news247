@@ -76,7 +76,7 @@
       <div />
     </v-list>
 
-    <template v-slot:append>
+    <!-- <template v-slot:append>
       <base-item
         :item="{
           title: $t('upgrade'),
@@ -84,7 +84,7 @@
           to: '/upgrade',
         }"
       />
-    </template>
+    </template> -->
   </v-navigation-drawer>
 </template>
 
@@ -113,13 +113,18 @@
         },
         {
           title: 'Post',
-          icon: 'mdi-clipboard-outline',
+          icon: 'mdi-message-text',
           to: '/admin/post/list',
         },
         {
           title: 'Category',
           icon: 'mdi-account-box-outline',
           to: '/admin/category/list',
+        },
+        {
+          title: 'Setting',
+          icon: 'mdi-wrench',
+          to: '/admin/setting',
         },
       ],
     }),

@@ -30,14 +30,13 @@
                     <ValidationProvider
                       v-slot="{ errors }"
                       name="Facebook url"
-                      rules="required|url"
+                      rules="url"
                     >
                       <v-text-field
                         v-model="facebook"
                         :error-messages="errors"
                         label="Facebook"
                         type="url"
-                        required
                       >
                       </v-text-field>
                     </ValidationProvider>
@@ -47,14 +46,13 @@
                     <ValidationProvider
                       v-slot="{ errors }"
                       name="Youtube url"
-                      rules="required|url"
+                      rules="url"
                     >
                       <v-text-field
                         v-model="youtube"
                         :error-messages="errors"
                         label="Youtube"
                         type="url"
-                        required
                       >
                       </v-text-field>
                     </ValidationProvider>
@@ -64,14 +62,12 @@
                     <ValidationProvider
                       v-slot="{ errors }"
                       name="Twitter url"
-                      rules="required|url"
                     >
                       <v-text-field
                         v-model="twitter"
                         :error-messages="errors"
                         label="Twitter"
                         type="url"
-                        required
                       >
                       </v-text-field>
                     </ValidationProvider>
@@ -81,14 +77,13 @@
                     <ValidationProvider
                       v-slot="{ errors }"
                       name="Instagram url"
-                      rules="required|url"
+                      rules="url"
                     >
                       <v-text-field
                         v-model="instagram"
                         :error-messages="errors"
                         label="Instagram"
                         type="url"
-                        required
                       >
                       </v-text-field>
                     </ValidationProvider>
@@ -97,15 +92,13 @@
                   <v-col cols="12">
                     <ValidationProvider
                       v-slot="{ errors }"
-                      name="Lindin url"
-                      rules="required|url"
+                      name="vimeo url"
                     >
                       <v-text-field
-                        v-model="linkdin"
+                        v-model="vimeo"
                         :error-messages="errors"
-                        label="Linkdin"
+                        label="Vimeo"
                         type="url"
-                        required
                       >
                       </v-text-field>
                     </ValidationProvider>
@@ -113,10 +106,7 @@
 
                   <v-col cols="12">
                     <v-btn class="success" @click="onSubmit" :disabled="invalid"
-                      >Click Me!</v-btn
-                    >
-                    <v-btn class="success" @click="clear"
-                      >Clear</v-btn
+                      >Save!</v-btn
                     >
                   </v-col>
                 </v-row>
@@ -130,6 +120,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import { required } from "vee-validate/dist/rules";
 import {
   extend,
@@ -167,37 +158,47 @@ export default {
     ValidationObserver,
   },
   data: () => ({
+    items:"",
     facebook: "",
     youtube: "",
     twitter: "",
     instagram: "",
-    linkdin: "",
+    vimeo: "",
   }),
-
+  created(){
+    axios.get('http://127.0.0.1:8000/api/setting/index')
+        .then((resp) => {
+          this.facebook = resp.data.data[0].facebook_url;
+          this.youtube = resp.data.data[0].youtube_url;
+          this.twitter = resp.data.data[0].twitter_url;
+          this.instagram = resp.data.data[0].instagram_url;
+          this.vimeo = resp.data.data[0].vimo_url;
+            console.log("Items",this.items);
+        })
+  },
   methods: {
-    onSubmit() {
-      console.log(
-        this.facebook +
-          " " +
-          this.youtube +
-          " " +
-          this.twitter +
-          " " +
-          this.instagram +
-          " " +
-          this.linkdin
-      );
-      this.clear();
+     onSubmit() {
+      let formData = new FormData();
+
+      formData.append('facebook_url', this.facebook);
+      formData.append('twitter_url', this.twitter);
+      formData.append('youtube_url', this.youtube);
+      formData.append('instagram_url', this.instagram);
+      formData.append('vimo_url', this.vimeo);
+      axios.post('http://localhost:8000/api/setting/store',
+        formData
+      )
+      .then((resp) => {
+        if(resp.data.status==200 && resp.data.data){
+          this.$swal(
+            'Good job!',
+            resp.data.message,
+            'success'
+          )
+        }
+      })
       this.$refs.observer.validate();
-    },
-    clear() {
-      this.facebook = "";
-      this.youtube = "";
-      this.twitter = "";
-      this.instagram = "";
-      this.linkdin = "";
-      this.$refs.observer.reset();
-    },
+    }
   },
 };
 </script>
