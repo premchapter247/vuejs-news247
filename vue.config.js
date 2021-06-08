@@ -1,8 +1,9 @@
 module.exports = {
   devServer: {
+    proxy: 'http://localhost:8000',
     disableHostCheck: true,
     overlay: {
-      warnings: false,
+      warnyings: false,
       errors: false
     }
   },

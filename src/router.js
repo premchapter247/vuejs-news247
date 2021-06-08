@@ -5,6 +5,7 @@ Vue.use(Router)
 
 export default new Router({
   base: process.env.BASE_URL,
+  mode: 'history',
   routes: [
     {
       path: '/admin',
@@ -57,9 +58,20 @@ export default new Router({
         },
         // Post
         {
-          name: 'Post Form',
-          path: 'post',
+          name: 'AddPost',
+          path: 'post/add',
           component: () => import('./components/base/Post'),
+        },
+        {
+          name: 'Post List',
+          path: 'post/list',
+          component: () => import('./components/base/PostList'),
+        },
+        // Post Edit
+        {
+          name: 'Post Edit',
+          path: 'post/edit/:id',
+          component: () => import('./components/base/PostEdit'),
         },
         // Post Category list
         {
@@ -86,11 +98,11 @@ export default new Router({
           component: () => import('./components/base/Login'),
         },
         // Registration Form
-        {
-          name: 'Registration Form',
-          path: 'registration',
-          component: () => import('./components/base/Registration'),
-        },
+        // {
+        //   name: 'Registration Form',
+        //   path: 'registration',
+        //   component: () => import('./components/base/Registration'),
+        // },
       ],
     },
     {

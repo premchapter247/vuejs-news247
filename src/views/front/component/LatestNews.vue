@@ -51,33 +51,25 @@
       </v-container>
     </section>
 
-    <section class="section">
-      <v-container>
-        <v-row>
-          <v-col cols="12">
-            <FeatureNews> </FeatureNews>
-          </v-col>
-        </v-row>
-      </v-container>
-    </section>
+    <v-container>
+      <v-row>
+        <v-col cols="12" md="8">
+          <TranddingNews> </TranddingNews>
+          <v-row>
+            <v-col cols="12" lg="6">
+              <TranddingListViewLeft> </TranddingListViewLeft>
+            </v-col>
+            <v-col cols="12" lg="6">
+              <TranddingListViewRight> </TranddingListViewRight>
+            </v-col>
+          </v-row>
+        </v-col>
 
-    <section class="section">
-      <v-container>
-        <v-row>
-          <v-col cols="12" md="8">
-            <TranddingNews> </TranddingNews>
-            <v-row>
-              <v-col cols="12" md="8" lg="6"> <TranddingListViewLeft> </TranddingListViewLeft> </v-col>
-              <v-col cols="12" md="8" lg="6"> <TranddingListViewRight> </TranddingListViewRight> </v-col>
-            </v-row>
-          </v-col>
-
-          <v-col cols="12" md="4">
-            <h1>Section</h1>
-          </v-col>
-        </v-row>
-      </v-container>
-    </section>
+        <v-col cols="12" md="4">
+          <MostView> </MostView>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 <script>
@@ -89,6 +81,7 @@ import TranddingNews from "./TranddingNews";
 import FeatureNews from "./FeatureNews";
 import TranddingListViewLeft from "./TranddingListViewLeft";
 import TranddingListViewRight from "./TranddingListViewRight";
+import MostView from "./MostView";
 
 import axios from "axios";
 
@@ -100,8 +93,8 @@ export default {
     TranddingNews,
     FeatureNews,
     TranddingListViewLeft,
-    TranddingListViewRight
-
+    TranddingListViewRight,
+    MostView,
   },
   data() {
     return {
