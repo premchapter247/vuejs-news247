@@ -22,7 +22,7 @@
               </div>
               <div class="list-content-wrap">
                 <div class="list-metas">
-                  <a href="" class="list-meta-category">{{ item.category_id}}</a>
+                  <a href="" class="list-meta-category">{{ item.category.title}}</a>
                   <a href="" class="list-meta-date">{{ moment(item.created_at).format("MMMM D, YYYY") }}</a>
                 </div>
                 <h4 class="list-content-title">
