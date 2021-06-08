@@ -66,7 +66,7 @@
                     <v-btn class="success" @click="onSubmit" :disabled="invalid"
                       >Login</v-btn
                     >
-                    <a href="#" target="_blank"> Forget Password? </a>
+                    <a href="#" target="_blank" class="display-1"> Forget Password? </a>
                   </v-card-actions>
                 </v-divide>
               </v-form>
@@ -80,6 +80,7 @@
 
 <script>
 import { required, email, min, regex } from "vee-validate/dist/rules";
+import axios from "axios";
 import {
   extend,
   ValidationObserver,
@@ -102,7 +103,7 @@ extend("min", {
 extend("regex", {
   ...regex,
   message:
-    "Password requires 1 of each of the following: uppercase letter, lowercase letter, number, special character.",
+    "Password is invalid",
 });
 
 extend("email", {
@@ -123,7 +124,18 @@ export default {
 
   methods: {
     onSubmit() {
-      alert("Hello");
+      axios
+        .post(
+          "http://127.0.0.1:8000/api/auth/login",
+          { email: this.email ,password:this.password},
+        )
+        .then((response) => {
+          if (response.data.token_type == "bearer") {
+          const token = response.data.access_token
+          localStorage.setItem('user-token', token)
+          this.$router.push({ path: "/admin" });
+          }
+        });
       this.$refs.observer.validate();
     },
     clear() {

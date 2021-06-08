@@ -85,6 +85,12 @@ export default new Router({
           path: 'category/add',
           component: () => import('./components/base/Category/Add'),
         },
+      ],
+    },
+    {
+      path: '/auth',
+      component: () => import('@/views/dashboard/Login'),
+      children: [
         // Login Form
         {
           name: 'Login Form',

@@ -60,21 +60,6 @@
                 </v-col>
               </ValidationProvider>
 
-              <!-- <ValidationProvider
-                v-slot="{ errors }"
-                name="Email"
-                rules="required|email"
-              >
-                <v-col cols="12">
-                  <v-text-field
-                    v-model="email"
-                    :error-messages="errors"
-                    label="Email"
-                    required
-                  />
-                </v-col>
-              </ValidationProvider> -->
-
               <ValidationProvider
                 v-slot="{ errors }"
                 name="category"
@@ -105,7 +90,6 @@
                     v-model="short_description"
                     label="Short Description"
                     :error-messages="errors"
-                    :counter="20"
                   />
                 </v-col>
               </ValidationProvider>
@@ -120,7 +104,6 @@
                     v-model="description"
                     :error-messages="errors"
                     label="Description"
-                    :counter="50"
                   />
                 </v-col>
               </ValidationProvider>
@@ -151,7 +134,11 @@
                 </v-col>
               </ValidationProvider> -->
               <v-col cols="12">
-                <v-btn class="success mr-5" @click="onSubmit" :disabled="invalid">
+                <v-btn
+                  class="success mr-5"
+                  @click="onSubmit"
+                  :disabled="invalid"
+                >
                   Click Me!
                 </v-btn>
                 <v-btn class="success" @click="clear"> clear </v-btn>
@@ -166,7 +153,8 @@
 
 <script>
 import axios from "axios";
-import { required, email, min } from "vee-validate/dist/rules";
+// import { required, email, min } from "vee-validate/dist/rules";
+import { required } from "vee-validate/dist/rules";
 import {
   extend,
   ValidationObserver,
@@ -181,15 +169,6 @@ extend("required", {
   message: "{_field_} can not be empty",
 });
 
-extend("min", {
-  ...min,
-  message: "{_field_} may not be greater than {length} characters",
-});
-
-extend("email", {
-  ...email,
-  message: "Email must be valid",
-});
 export default {
   name: "Post",
   components: {
@@ -250,7 +229,6 @@ export default {
       this.short_description = "";
       this.description = "";
       this.select = null;
-      this.email = "";
       this.image = null;
       this.$refs.observer.reset();
     },

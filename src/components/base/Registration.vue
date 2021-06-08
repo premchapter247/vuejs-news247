@@ -1,0 +1,323 @@
+<template>
+  <v-container fluid tag="section">
+    <v-row justify="center">
+      <v-col cols="12" sm="8">
+        <div
+          class="
+            v-card--material
+            pa-5
+            my-md-6
+            elevation-10
+            v-card v-sheet
+            v-card--material--has-heading
+          "
+        >
+          <div class="d-flex grow flex-wrap">
+            <div
+              class="v-card--material__heading mb-n5 elevation-6 success pa-5"
+              style="width: 100%"
+            >
+              <div class="text-h3 text-center white--text font-weight-light">
+                Register New Account
+              </div>
+            </div>
+          </div>
+          <v-card-text>
+            <ValidationObserver ref="observer" v-slot="{ invalid }">
+              <v-form @submit.prevent="onSubmit">
+                <v-row>
+                  <v-col cols="12" sm="12" md="6">
+                    <ValidationProvider
+                      v-slot="{ errors }"
+                      name="First name"
+                      rules="required|alpha|max:15"
+                    >
+                      <v-text-field
+                        v-model="first_name"
+                        :error-messages="errors"
+                        label="First Name"
+                        :counter="15"
+                        type="text"
+                        required
+                      >
+                      </v-text-field>
+                    </ValidationProvider>
+                  </v-col>
+
+                  <v-col cols="12" sm="12" md="6">
+                    <ValidationProvider
+                      v-slot="{ errors }"
+                      name="Last name"
+                      rules="required|alpha|max:20"
+                    >
+                      <v-text-field
+                        v-model="last_name"
+                        :error-messages="errors"
+                        label="Last Name"
+                        :counter="20"
+                        type="text"
+                        required
+                      >
+                      </v-text-field>
+                    </ValidationProvider>
+                  </v-col>
+
+                  <v-col cols="12">
+                    <ValidationProvider
+                      v-slot="{ errors }"
+                      name="Phone number"
+                      rules="required|digits:10|customPhoneNumber"
+                    >
+                      <v-text-field
+                        type="tel"
+                        v-model="phoneNumber"
+                        :counter="10"
+                        :error-messages="errors"
+                        label="Phone Number"
+                        required
+                      ></v-text-field>
+                    </ValidationProvider>
+                  </v-col>
+                  <v-col cols="12">
+                    <ValidationProvider
+                      v-slot="{ errors }"
+                      name="Email"
+                      rules="required|email"
+                    >
+                      <v-text-field
+                        v-model="email"
+                        :error-messages="errors"
+                        label="Email"
+                        type="email"
+                        required
+                      >
+                      </v-text-field>
+                    </ValidationProvider>
+                  </v-col>
+                  <v-col cols="12">
+                    <ValidationProvider
+                      v-slot="{ errors }"
+                      name="Password"
+                      rules="required|confirmed:confirm_password"
+                      :balls="true"
+                    >
+                      <v-text-field
+                        v-model="password"
+                        :error-messages="errors"
+                        label="Password"
+                        name="password"
+                        ref="password"
+                        :counter="20"
+                        :type="showPassword ? 'text' : 'password'"
+                        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                        @click:append="showPassword = !showPassword"
+                        required
+                      >
+                      </v-text-field>
+                    </ValidationProvider>
+                  </v-col>
+                  <v-col cols="12">
+                    <ValidationProvider
+                      v-slot="{ errors }"
+                      name="Confirm password"
+                      rules="required|confirmPassword"
+                    >
+                      <v-text-field
+                        v-model="password_confirmation"
+                        :error-messages="errors"
+                        label="Confirm Password"
+                        :counter="20"
+                        :type="showConfirmPassword ? 'text' : 'password'"
+                        :append-icon="
+                          showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'
+                        "
+                        @click:append="
+                          showConfirmPassword = !showConfirmPassword
+                        "
+                      >
+                      </v-text-field>
+                    </ValidationProvider>
+                  </v-col>
+
+                  <v-col cols="12">
+                    <!-- <v-card-actions> -->
+                    <v-btn class="success" @click="onSubmit" :disabled="invalid"
+                      >Register</v-btn
+                    >
+                    <!-- </v-card-actions> -->
+                  </v-col>
+                </v-row>
+              </v-form>
+            </ValidationObserver>
+          </v-card-text>
+        </div>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script>
+import {
+  required,
+  email,
+  min,
+  max,
+  alpha,
+  digits,
+} from "vee-validate/dist/rules";
+import axios from "axios";
+import {
+  extend,
+  ValidationObserver,
+  ValidationProvider,
+  setInteractionMode,
+} from "vee-validate";
+
+setInteractionMode("eager");
+
+var errorMessage =
+  "requires 1 of each of the following: uppercase letter, lowercase letter, number, special character (!@#$%^&*-).";
+extend("customPassword", {
+  message: (field) => `The ${field} ${errorMessage}`,
+  validate: (value) => {
+    var mustContainTheseChars =
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*-]).*$/;
+    var notTheseChars = /["'?/<>\s]/;
+    var containsRequiredChars = mustContainTheseChars.test(value);
+    var containsForbiddenChars = notTheseChars.test(value);
+    if (containsRequiredChars && !containsForbiddenChars) {
+      return true;
+    } else {
+      if (containsForbiddenChars) {
+        errorMessage = `contains forbidden characters: " ' + ? / < > or space`;
+      } else {
+        errorMessage = `min length 8 characters, and must include 1 uppercase letter, lowercase letter, number, special character (!@#$%^&*-).`;
+      }
+      return false;
+    }
+  },
+});
+
+var errorPhoneNumber = "requires 10 digits.";
+extend("customPhoneNumber", {
+  message: (field) => `The ${field} ${errorPhoneNumber}`,
+  validate: (value) => {
+    var mustContainTheseNumber = /^[6-9]{1}[0-9]{9}$/;
+    var containsRequiredNumber = mustContainTheseNumber.test(value);
+    if (containsRequiredNumber) {
+      return true;
+    } else {
+      errorPhoneNumber = "is incorrect.";
+      return false;
+    }
+  },
+});
+
+var confirmedPassword = "is required.";
+extend("confirmPassword", {
+  message: (field) => `The ${field} ${confirmedPassword}`,
+  validate: (value) => {
+    // console.log(this.password + " " + value);
+    if (value === this.password) {
+      return true;
+    } else {
+      confirmedPassword = "must be same.";
+      return false;
+    }
+  },
+});
+
+extend("required", {
+  ...required,
+  message: "{_field_} can not be empty",
+});
+
+extend("digits", {
+  ...digits,
+  message: "{_field_} needs to be {length} digits.",
+});
+
+extend("alpha", {
+  ...alpha,
+  message:
+    "{_field_} can not containt any number, space or spacial characters.",
+});
+
+extend("min", {
+  ...min,
+  message: "{_field_} must be {length} characters",
+});
+
+extend("max", {
+  ...max,
+  message: "{_field_} may not be greater than {length} characters",
+});
+
+extend("email", {
+  ...email,
+  message: "Email must be valid",
+});
+
+export default {
+  components: {
+    ValidationProvider,
+    ValidationObserver,
+  },
+  data: () => ({
+    showPassword: false,
+    showConfirmPassword: false,
+    first_name: "",
+    last_name: "",
+    email: "",
+    phoneNumber: null,
+    password: "",
+    password_confirmation: "",
+  }),
+
+  methods: {
+    onSubmit() {
+      console.log(
+        this.first_name +
+          " " +
+          this.last_name +
+          " " +
+          this.email +
+          " " +
+          this.phoneNumber +
+          " " +
+          this.password +
+          " " +
+          this.password_confirmation
+      );
+      this.$refs.observer.validate();
+      this.clear();
+
+      axios
+        .post("http://127.0.0.1:8000/api/auth/login", {
+          email: this.email,
+          password: this.password,
+        })
+        .then((response) => {
+          if (response.data.token_type == "bearer") {
+            const token = response.data.access_token;
+            localStorage.setItem("user-token", token);
+            this.$router.push({
+              path: "/admin",
+            });
+          }
+        });
+    },
+    clear() {
+      this.showPassword = false;
+      this.showConfirmPassword = false;
+      this.first_name = "";
+      this.last_name = "";
+      this.email = "";
+      this.phoneNumber = null;
+      this.password = "";
+      this.confirm_password = "";
+      this.$refs.observer.reset();
+    },
+  },
+};
+</script>

@@ -102,3 +102,6 @@
        url('../fonts/heebo-v10-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
        url('../fonts/heebo-v10-latin-700.svg#Heebo') format('svg'); /* Legacy iOS */
 }
+*{
+  font-family: 'Heebo';
+}
