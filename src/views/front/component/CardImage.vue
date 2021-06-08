@@ -1,8 +1,8 @@
 <template>
   <div class="feature-card-link">
     <div class="post_img gradient1">
-      <a href="#"
-        ><img :src="'http://127.0.0.1:8000/image/' + src" alt="thumb" class="img-responsive"
+      <a href="#" class="feature-news-link"
+        ><img :src="'http://127.0.0.1:8000/image/' + src" alt="thumb" class="img-responsive" draggable="false"
       /></a>
     </div>
     <div class="single_post_text">
@@ -115,5 +115,10 @@ a:hover {
 .feature-card-link{
   display: block;
   position: relative;
+}
+.feature-news-link{
+  position: relative;
+  display: block;
+  height: 320px;
 }
 </style>

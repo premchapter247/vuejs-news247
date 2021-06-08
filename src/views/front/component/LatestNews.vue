@@ -51,25 +51,143 @@
       </v-container>
     </section>
 
-    <v-container>
-      <v-row>
-        <v-col cols="12" md="8">
-          <TranddingNews> </TranddingNews>
-          <v-row>
-            <v-col cols="12" lg="6">
-              <TranddingListViewLeft> </TranddingListViewLeft>
-            </v-col>
-            <v-col cols="12" lg="6">
-              <TranddingListViewRight> </TranddingListViewRight>
-            </v-col>
-          </v-row>
-        </v-col>
+    <section class="section">
+      <div class="container">
+        <FeatureNews> </FeatureNews>
+      </div>
+    </section>
 
-        <v-col cols="12" md="4">
-          <MostView> </MostView>
-        </v-col>
-      </v-row>
-    </v-container>
+    <section class="section">
+        <v-container>
+        <v-row>
+          <v-col cols="12" md="8">
+            <TranddingNews> </TranddingNews>
+            <div class="trending-list-view">
+              <ul class="post-list-view mt-3">
+                <!-- loop -->
+                <li>
+                  <a href="#" class="post-list-view-link">
+                    <div class="list-img-wrap">
+                      <img
+                        src="https://newsprk.quomodosoft.com/static/media/tab1.81e238f1.jpg"
+                      />
+                    </div>
+                    <div class="list-content-wrap">
+                      <div class="list-metas">
+                        <a href="" class="list-meta-category">technology</a>
+                        <a href="" class="list-meta-date">March 26, 2020</a>
+                      </div>
+                      <h4 class="list-content-title">
+                        Copa America: Luis Suarez from devastated US
+                      </h4>
+                    </div>
+                  </a>
+                </li>
+                <!-- loop -->
+                <li>
+                  <a href="" class="post-list-view-link">
+                    <div class="list-img-wrap">
+                      <img
+                        src="https://newsprk.quomodosoft.com/static/media/tab2.4a35178d.jpg"
+                      />
+                    </div>
+                    <div class="list-content-wrap">
+                      <div class="list-metas">
+                        <a href="" class="list-meta-category">technology</a>
+                        <a href="" class="list-meta-date">March 26, 2020</a>
+                      </div>
+                      <h4 class="list-content-title">
+                        Copa America: Luis Suarez from devastated US
+                      </h4>
+                    </div>
+                  </a>
+                </li>
+                <!-- loop -->
+                <li>
+                  <a href="" class="post-list-view-link">
+                    <div class="list-img-wrap">
+                      <img
+                        src="https://newsprk.quomodosoft.com/static/media/tab3.1470a81a.jpg"
+                      />
+                    </div>
+                    <div class="list-content-wrap">
+                      <div class="list-metas">
+                        <a href="" class="list-meta-category">technology</a>
+                        <a href="" class="list-meta-date">March 26, 2020</a>
+                      </div>
+                      <h4 class="list-content-title">
+                        Copa America: Luis Suarez from devastated US
+                      </h4>
+                    </div>
+                  </a>
+                </li>
+                <!-- loop -->
+                <li>
+                  <a href="" class="post-list-view-link">
+                    <div class="list-img-wrap">
+                      <img
+                        src="https://newsprk.quomodosoft.com/static/media/tab1.81e238f1.jpg"
+                      />
+                    </div>
+                    <div class="list-content-wrap">
+                      <div class="list-metas">
+                        <a href="" class="list-meta-category">technology</a>
+                        <a href="" class="list-meta-date">March 26, 2020</a>
+                      </div>
+                      <h4 class="list-content-title">
+                        Copa America: Luis Suarez from devastated US
+                      </h4>
+                    </div>
+                  </a>
+                </li>
+                <!-- loop -->
+                <li>
+                  <a href="" class="post-list-view-link">
+                    <div class="list-img-wrap">
+                      <img
+                        src="https://newsprk.quomodosoft.com/static/media/tab2.4a35178d.jpg"
+                      />
+                    </div>
+                    <div class="list-content-wrap">
+                      <div class="list-metas">
+                        <a href="" class="list-meta-category">technology</a>
+                        <a href="" class="list-meta-date">March 26, 2020</a>
+                      </div>
+                      <h4 class="list-content-title">
+                        Copa America: Luis Suarez from devastated US
+                      </h4>
+                    </div>
+                  </a>
+                </li>
+                <!-- loop -->
+                <li>
+                  <a href="" class="post-list-view-link">
+                    <div class="list-img-wrap">
+                      <img
+                        src="https://newsprk.quomodosoft.com/static/media/tab3.1470a81a.jpg"
+                      />
+                    </div>
+                    <div class="list-content-wrap">
+                      <div class="list-metas">
+                        <a href="" class="list-meta-category">technology</a>
+                        <a href="" class="list-meta-date">March 26, 2020</a>
+                      </div>
+                      <h4 class="list-content-title">
+                        Copa America: Luis Suarez from devastated US
+                      </h4>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </v-col>
+
+          <v-col cols="12" md="4">
+            <MostView> </MostView>
+          </v-col>
+        </v-row>
+      </v-container>
+    </section>
   </div>
 </template>
 <script>
@@ -118,5 +236,25 @@ export default {
 }
 .latest-news-thumb{
   height: 60px;
+}
+.trending-list-view .post-list-view{
+  padding: 0;
+  margin: 0; 
+}
+.trending-list-view .post-list-view li{
+  width: 100%;
+  border-color: #dcdedf;
+}
+@media (min-width:768px){
+  .trending-list-view .post-list-view li{
+    width: calc(50% - 12px);
+    box-sizing: border-box;
+  }
+  .trending-list-view .post-list-view li:nth-child(odd){
+    margin-right: 12px;
+  }
+  .trending-list-view .post-list-view li:nth-child(even){
+    margin-left: 12px;
+  }
 }
 </style>

@@ -35,6 +35,9 @@ a{
   background-color: #fcfcfc;
   color: #17222b;
 }
+.post-list-view-link{
+  color: #17222b !important;
+}
 .container{
   padding-bottom: 0;
   padding-top: 0;
@@ -72,7 +75,9 @@ a{
   height: calc(100% - 2px);
   line-height: 1;
   top: 46%;
-  width: 25px;
+  width: 30px;
+  border: none;
+  box-shadow: 0 10px 40px rgb(0 0 0 / 15%);
 }
 .slick-thumb-arrow .slick-prev{
   left: 0;
@@ -161,5 +166,17 @@ a{
   line-height: 21px;
   font-weight: 400;
   color: #fff;
+}
+.slick-gap-row{
+  margin: 0 -12px;
+}
+.slick-gap-col{
+  padding: 0 12px;
+}
+.slick-gap-row.slick-arrow-top .slick-next{
+  right: 12px;
+}
+.slick-gap-row.slick-arrow-top .slick-prev{
+  right: 50px;
 }
 </style>

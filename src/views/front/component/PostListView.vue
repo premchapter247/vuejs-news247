@@ -331,9 +331,6 @@
     </div>
   </div>
 </template>
-
-<style scoped></style>
-
 <script>
 export default {
   name: "PostListView",
@@ -364,14 +361,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .post-list-view {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
   list-style: none;
-  padding: 0;
-  margin: 0;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 .post-list-view li {
   padding-bottom: 10px;

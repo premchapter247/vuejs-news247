@@ -3,8 +3,8 @@
     <div>
       <h2 class="widget-title">Feature News</h2>
     </div>
-    <VueSlickCarousel :arrows="true" :dots="false" v-bind="setting" class="slick-arrow-top">
-      <div v-for="list in lists" :key="list.id">
+    <VueSlickCarousel :arrows="true" :dots="false" v-bind="setting" class="slick-arrow-top slick-gap-row">
+      <div v-for="list in lists" :key="list.id" class="slick-gap-col">
         <CardImage
           :title="list.title"
           :src="list.image"
