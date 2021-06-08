@@ -13,7 +13,7 @@
       <div>
         <ul class="post-list-view">
           <!-- loop -->
-          <li>
+          <li class="pt-0">
             <a href="#" class="post-list-view-link">
               <div class="list-img-wrap">
                 <img
@@ -139,7 +139,7 @@
       <div>
         <ul class="post-list-view">
           <!-- loop -->
-          <li>
+          <li class="pt-0">
             <a href="#" class="post-list-view-link">
               <div class="list-img-wrap">
                 <img

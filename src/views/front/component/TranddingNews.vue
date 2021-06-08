@@ -4,8 +4,8 @@
       <h2 class="widget-title">Trending News</h2>
     </div>
 
-    <VueSlickCarousel :arrows="true" :dots="false" v-bind="setting" class="slick-arrow-top">
-      <div v-for="card in cards" :key="card.id">
+    <VueSlickCarousel :arrows="true" :dots="false" v-bind="setting" class="slick-arrow-top slick-gap-row">
+      <div v-for="card in cards" :key="card.id" class="slick-gap-col">
         <Card
           :title="card.title"
           :src="card.image"

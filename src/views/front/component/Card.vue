@@ -1,9 +1,10 @@
 <template>
   <div>
-    <div class="mx-2">
-      <v-img :src="'http://127.0.0.1:8000/image/' + src" class="white--text align-end">
+    <div>
+      <div class="tending-img-wrap">
+        <img :src="'http://127.0.0.1:8000/image/' + src" class="white--text align-end img-responsive" draggable="false">
         <v-badge left color="red" class="tranding"> </v-badge>
-      </v-img>
+      </div>
 
       <div class="py-5">
         <div class="pb-10px">
@@ -96,5 +97,9 @@ a:hover {
   position: absolute;
   top: 25px;
   left: 25px;
+}
+.tending-img-wrap{
+  position: relative;
+  height: 252px;
 }
 </style>
