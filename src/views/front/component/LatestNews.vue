@@ -19,7 +19,7 @@
                   >
                   <div class="post-content-wrap">
                     <div class="post-card-metas">
-                      <a href="" class="post-card-category">{{ item.category_id}}</a>
+                      <a href="" class="post-card-category">{{ item.category.title}}</a>
                       <a href="" class="post-card-date">{{ moment(item.created_at).format("MMMM D, YYYY") }} </a>
                     </div>
                     <a href="" class="post-card-title">

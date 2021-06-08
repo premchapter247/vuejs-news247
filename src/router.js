@@ -85,6 +85,11 @@ export default new Router({
           path: 'category/add',
           component: () => import('./components/base/Category/Add'),
         },
+        {
+          name: 'Social Media Links',
+          path: 'setting',
+          component: () => import('./components/base/Setting'),
+        },
 
       ],
     },
@@ -99,11 +104,7 @@ export default new Router({
           component: () => import('./components/base/Login'),
         },
         // Social Media
-        {
-          name: 'Social Media Links',
-          path: 'setting',
-          component: () => import('./components/base/Setting'),
-        },
+       
         // Registration Form
         // {
           //   name: 'Registration Form',
