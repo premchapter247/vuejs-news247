@@ -57,7 +57,7 @@
             <tr v-for="(item, index) in items" :key="item.id">
                 <td>{{index+1}}</td>
                 <td>{{item.title}}</td>
-                <td>{{item.category_id}}</td>
+                <td>{{item.category.title}}</td>
                 <td>{{item.shortDesc.substring(0,30)+".." }}</td>
                 <td class="text-right">{{item.description.substring(0,50)+".." }}</td>
                 <td class="text-right">{{format_date(item.created_at)}}</td>
