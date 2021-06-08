@@ -38,8 +38,8 @@
               </div>
               <div class="list-content-wrap">
                 <div class="list-metas">
-                  <a href="" class="list-meta-category">{{ item.category_id }}</a>
-                  <a href="" class="list-meta-date">{{ item.created_at }}</a>
+                  <a href="" class="list-meta-category">TECHNOLOGY</a>
+                  <a href="" class="list-meta-date">{{ moment(item.created_at).format("MMMM D, YYYY") }} </a>
                 </div>
                 <h4 class="list-content-title">
                   {{ item.title }}
@@ -62,8 +62,8 @@
               </div>
               <div class="list-content-wrap">
                 <div class="list-metas">
-                  <a href="" class="list-meta-category">{{ related.category_id }}</a>
-                  <a href="" class="list-meta-date">{{ related.created_at }}</a>
+                  <a href="" class="list-meta-category">TECHNOLOGY</a>
+                  <a href="" class="list-meta-date"> {{ moment(related.created_at).format("MMMM D, YYYY") }} </a>
                 </div>
                 <h4 class="list-content-title">
                   {{ related.title }}
@@ -86,8 +86,8 @@
               </div>
               <div class="list-content-wrap">
                 <div class="list-metas">
-                  <a href="" class="list-meta-category">{{ popular.category_id }}</a>
-                  <a href="" class="list-meta-date">{{ popular.created_at }}</a>
+                  <a href="" class="list-meta-category">TECHNOLOGY</a>
+                  <a href="" class="list-meta-date"> {{ moment(popular.created_at).format("MMMM D, YYYY") }}</a>
                 </div>
                 <h4 class="list-content-title">
                   {{ popular.title }}
@@ -102,11 +102,13 @@
 </template>
 <script>
 import axios from "axios";
+import moment from 'moment';
 
 export default {
   name: "PostListView",
   data() {
     return {
+      moment: moment,
       list: "undefined",
       relateds: "undefined",
       populars: "undefined",

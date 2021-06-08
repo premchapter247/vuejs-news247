@@ -19,13 +19,13 @@
                   >
                   <div class="post-content-wrap">
                     <div class="post-card-metas">
-                      <a href="" class="post-card-category">technology</a>
-                      <a href="" class="post-card-date">June 8, 2021</a>
+                      <a href="" class="post-card-category">{{ item.category_id}}</a>
+                      <a href="" class="post-card-date">{{ moment(item.created_at).format("MMMM D, YYYY") }} </a>
                     </div>
                     <a href="" class="post-card-title">
-                      Copa America: Luis Suarez from devastated US America
+                      {{ item.title}}
                     </a>
-                    <p class="post-p">The property, complete with 30-seat screening from room, a 100-seat amphitheater and a swimming pond with sandy shower…</p>
+                    <p class="post-p">{{ item.shortDesc}}</p>
                   </div>
                 </div>
               </VueSlickCarousel>
@@ -73,119 +73,24 @@
             <div class="trending-list-view">
               <ul class="post-list-view mt-3">
                 <!-- loop -->
-                <li>
+                <li  v-for="toppost in topposts" :key="toppost.id">
                   <a href="#" class="post-list-view-link">
                     <div class="list-img-wrap">
                       <img
-                        src="https://newsprk.quomodosoft.com/static/media/tab1.81e238f1.jpg"
+                         :src="'http://127.0.0.1:8000/image/' + toppost.thumbnail"
                       />
                     </div>
                     <div class="list-content-wrap">
                       <div class="list-metas">
                         <a href="" class="list-meta-category">technology</a>
-                        <a href="" class="list-meta-date">March 26, 2020</a>
+                        <a href="" class="list-meta-date">{{ moment(toppost.created_at).format("MMMM D, YYYY") }}</a>
                       </div>
                       <h4 class="list-content-title">
-                        Copa America: Luis Suarez from devastated US
+                        {{ toppost.title }}
                       </h4>
                     </div>
                   </a>
-                </li>
-                <!-- loop -->
-                <li>
-                  <a href="" class="post-list-view-link">
-                    <div class="list-img-wrap">
-                      <img
-                        src="https://newsprk.quomodosoft.com/static/media/tab2.4a35178d.jpg"
-                      />
-                    </div>
-                    <div class="list-content-wrap">
-                      <div class="list-metas">
-                        <a href="" class="list-meta-category">technology</a>
-                        <a href="" class="list-meta-date">March 26, 2020</a>
-                      </div>
-                      <h4 class="list-content-title">
-                        Copa America: Luis Suarez from devastated US
-                      </h4>
-                    </div>
-                  </a>
-                </li>
-                <!-- loop -->
-                <li>
-                  <a href="" class="post-list-view-link">
-                    <div class="list-img-wrap">
-                      <img
-                        src="https://newsprk.quomodosoft.com/static/media/tab3.1470a81a.jpg"
-                      />
-                    </div>
-                    <div class="list-content-wrap">
-                      <div class="list-metas">
-                        <a href="" class="list-meta-category">technology</a>
-                        <a href="" class="list-meta-date">March 26, 2020</a>
-                      </div>
-                      <h4 class="list-content-title">
-                        Copa America: Luis Suarez from devastated US
-                      </h4>
-                    </div>
-                  </a>
-                </li>
-                <!-- loop -->
-                <li>
-                  <a href="" class="post-list-view-link">
-                    <div class="list-img-wrap">
-                      <img
-                        src="https://newsprk.quomodosoft.com/static/media/tab1.81e238f1.jpg"
-                      />
-                    </div>
-                    <div class="list-content-wrap">
-                      <div class="list-metas">
-                        <a href="" class="list-meta-category">technology</a>
-                        <a href="" class="list-meta-date">March 26, 2020</a>
-                      </div>
-                      <h4 class="list-content-title">
-                        Copa America: Luis Suarez from devastated US
-                      </h4>
-                    </div>
-                  </a>
-                </li>
-                <!-- loop -->
-                <li>
-                  <a href="" class="post-list-view-link">
-                    <div class="list-img-wrap">
-                      <img
-                        src="https://newsprk.quomodosoft.com/static/media/tab2.4a35178d.jpg"
-                      />
-                    </div>
-                    <div class="list-content-wrap">
-                      <div class="list-metas">
-                        <a href="" class="list-meta-category">technology</a>
-                        <a href="" class="list-meta-date">March 26, 2020</a>
-                      </div>
-                      <h4 class="list-content-title">
-                        Copa America: Luis Suarez from devastated US
-                      </h4>
-                    </div>
-                  </a>
-                </li>
-                <!-- loop -->
-                <li>
-                  <a href="" class="post-list-view-link">
-                    <div class="list-img-wrap">
-                      <img
-                        src="https://newsprk.quomodosoft.com/static/media/tab3.1470a81a.jpg"
-                      />
-                    </div>
-                    <div class="list-content-wrap">
-                      <div class="list-metas">
-                        <a href="" class="list-meta-category">technology</a>
-                        <a href="" class="list-meta-date">March 26, 2020</a>
-                      </div>
-                      <h4 class="list-content-title">
-                        Copa America: Luis Suarez from devastated US
-                      </h4>
-                    </div>
-                  </a>
-                </li>
+                </li>               
               </ul>
             </div>
           </v-col>
@@ -209,6 +114,7 @@ import TranddingListViewLeft from "./TranddingListViewLeft";
 import TranddingListViewRight from "./TranddingListViewRight";
 import MostView from "./MostView";
 import axios from "axios";
+import moment from 'moment';
 
 export default {
   name: "LatestNews",
@@ -224,6 +130,8 @@ export default {
   data() {
     return {
       list: "undefined",
+      topposts: "undefined",
+      moment: moment,
     };
   },
   mounted() {
@@ -231,6 +139,12 @@ export default {
       .post("http://127.0.0.1:8000/api/post/list", { start: 0, total: 10 })
       .then((resp) => {
         this.list = resp.data.data;
+        console.warn(resp.data.data);
+      });
+    axios
+      .post("http://127.0.0.1:8000/api/post/list", { start: 6, total: 6 })
+      .then((resp) => {
+        this.topposts = resp.data.data;
         console.warn(resp.data.data);
       });
   },
