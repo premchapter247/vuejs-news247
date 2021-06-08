@@ -22,6 +22,8 @@ import vuetify from './plugins/vuetify'
 import i18n from './i18n'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 import { ValidationProvider } from 'vee-validate/dist/vee-validate.full.esm'
 import { ValidationObserver } from 'vee-validate'
@@ -30,7 +32,7 @@ Vue.component('ValidationProvider', ValidationProvider)
 Vue.component('ValidationObserver', ValidationObserver)
 
 Vue.config.productionTip = false
-
+Vue.use(VueSweetalert2);
 new Vue({
   router,
   store,

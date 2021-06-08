@@ -24,7 +24,7 @@
               "
               style="width: 100%"
             >
-            <div class="text-h3 white--text font-weight-light">Add Post</div>
+            <div class="text-h3 white--text font-weight-light">Edit Post</div>
             </div>
             <!-- adding button with tooltips -->
             <v-tooltip top>
@@ -59,28 +59,11 @@
                   />
                 </v-col>
               </ValidationProvider>
-
-              <!-- <ValidationProvider
-                v-slot="{ errors }"
-                name="Email"
-                rules="required|email"
-              >
-                <v-col cols="12">
-                  <v-text-field
-                    v-model="email"
-                    :error-messages="errors"
-                    label="Email"
-                    required
-                  />
-                </v-col>
-              </ValidationProvider> -->
-
               <ValidationProvider
                 v-slot="{ errors }"
                 name="category"
                 rules="required"
               >
-
                 <v-col cols="12">
                   <v-select
                     v-model="select"
@@ -132,10 +115,6 @@
               >
                <input type="file" class="custom-file-input" :error-messages="errors" id="customFile"
                         ref="file" @change="handleFileObject()">
-                <div v-if="ImageUrl" id="preview">
-                  <img :src="ImageUrl" class="remove-img" />
-                  <!-- <button @click="removeImage()">Remove</button> -->
-                </div>
               </ValidationProvider>
               <!--
                 <v-col co ls="12">
@@ -191,7 +170,7 @@ extend("email", {
   message: "Email must be valid",
 });
 export default {
-  name: "Post",
+  name: "PostEdit",
   components: {
     ValidationObserver,
     ValidationProvider,
@@ -205,13 +184,11 @@ export default {
       description: "",
       select: [],
       image: '',
-     ImageUrl:''
     };
   },
   methods: {
     handleFileObject() {
       this.image = this.$refs.file.files[0];
-      this.ImageUrl = URL.createObjectURL(this.image);
     },
     onSubmit(e) {
       e.preventDefault();
@@ -256,6 +233,17 @@ export default {
     },
   },
   created(){
+    axios.get('http://127.0.0.1:8000/api/post/edit/'+this.$route.params.id)
+        .then((resp) => {
+          this.items = resp.data.data;
+          this.title = this.items.title;
+          this.category_id = this.items.category_id;
+          this.description = this.items.description;
+          this.short_description = this.items.shortDesc;
+          this.image = this.items.image;
+          console.log('Item',this.items);
+        })
+    // Calling Category API for shwoing data
     axios.get('http://127.0.0.1:8000/api/category/index')
         .then((resp) => {
           this.items = resp.data.data.data
@@ -264,6 +252,7 @@ export default {
             this.items[i]['value'] = this.items[i].id;
           }
         })
+
   }
 };
 </script>
@@ -275,23 +264,4 @@ export default {
     top: 11px;
 
 }
-
-#preview {
-  display: flex;
-  /* justify-content: center; */
-  /* align-items: center; */
-}
-
-#preview img {
-  max-width: 198px;
-    margin: 20px 0;
-}
-/* .remove-img{
-  position: absolute;
-  left: 2px;
-  top: 144px;
-  background: #8b000df5;
-  padding: 4px 15px;
-  color: #fff;
-} */
 </style>

@@ -112,19 +112,9 @@
           to: '/admin',
         },
         {
-          icon: 'mdi-account',
-          title: 'user',
-          to: '/admin/pages/user',
-        },
-        {
-          title: 'rtables',
+          title: 'Post',
           icon: 'mdi-clipboard-outline',
-          to: '/admin/tables/regular-tables',
-        },
-        {
-          title: 'icons',
-          icon: 'mdi-chart-bubble',
-          to: '/admin/components/icons',
+          to: '/admin/post/list',
         },
         {
           title: 'Category',
