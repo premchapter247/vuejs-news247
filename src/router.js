@@ -46,6 +46,11 @@ export default new Router({
           path: 'category/add',
           component: () => import('./components/base/Category/Add'),
         },
+        {
+          name: 'Social Media Links',
+          path: 'setting',
+          component: () => import('./components/base/Setting'),
+        },
 
       ],
     },

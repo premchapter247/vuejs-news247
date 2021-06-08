@@ -9,7 +9,7 @@
         <Card
           :title="card.title"
           :src="card.image"
-          :category="card.category_id"
+          :category="card.category.title"
           :date="card.created_at"
           :short_desc="card.shortDesc"
           :description="card.description"

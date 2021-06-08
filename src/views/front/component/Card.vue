@@ -9,7 +9,7 @@
       <div class="py-5">
         <div class="pb-10px">
           <a href="#" class="post_type1 f-500">{{ category }}</a>
-          <a href="#" class="post_type2"> {{ date }}</a>
+          <a href="#" class="post_type2"> {{ moment(date).format("MMMM D, YYYY") }}</a>
         </div>
 
         <div class="pb-0">
@@ -26,7 +26,14 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
+  data() {
+    return {
+      moment: moment,
+    };
+  },
   props: ["title", "src", "category", "date", "short_desc", "description"],
 };
 </script>

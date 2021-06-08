@@ -8,7 +8,7 @@
         <CardImage
           :title="list.title"
           :src="list.image"
-          :category="list.category_id"
+          :category="list.category.title"
           :date="list.created_at"
           :short_desc="list.shortDesc"
           :description="list.description"
