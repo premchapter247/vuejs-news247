@@ -119,7 +119,7 @@ export default {
   },
   mounted() {
     axios
-      .post("http://127.0.0.1:8000/api/post/list", { start: 10, total: 5 })
+      .post("http://127.0.0.1:8000/api/post/list", { start: 0, total: 5 })
       .then((resp) => {
         this.lists = resp.data.data;
         console.warn(resp.data.data);
@@ -171,6 +171,7 @@ export default {
 .post-list-view li {
   padding-bottom: 10px;
   padding-top: 15px;
+  width: 100%;
   border-bottom: 1px dashed #3a434b;
 }
 
@@ -281,6 +282,9 @@ export default {
   cursor: pointer;
   color: black;
   text-align: center;
+}
+.list-content-wrap{
+  width: 100%;
 }
 </style>
 
