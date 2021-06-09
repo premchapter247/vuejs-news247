@@ -1,8 +1,10 @@
 <template>
   <div>
     <div>
-      <h2 class="widget-title">Most View</h2>
+      <h2 class="widget-title" style="color: black">Most View</h2>
     </div>
+
+
 
     <VueSlickCarousel
       :arrows="true"
@@ -13,7 +15,7 @@
       <div>
         <ul class="post-list-view">
           <!-- loop -->
-          <li class="pt-0" v-for="item in list" :key="item.id">
+          <li v-for="item in list" :key="item.id">
             <a href="#" class="post-list-view-link">
               <div class="list-img-wrap">
                 <img
@@ -38,7 +40,7 @@
       <div>
         <ul class="post-list-view">
           <!-- loop -->
-          <li class="pt-0">
+          <li>
             <a href="#" class="post-list-view-link">
               <div class="list-img-wrap">
                 <img
@@ -204,5 +206,7 @@ h2{
     font-size: 36px;
     font-weight: 500;
 }
-
+.list-content-wrap {
+  width: 100%;
+}
 </style>
