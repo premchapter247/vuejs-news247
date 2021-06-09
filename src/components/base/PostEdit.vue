@@ -67,9 +67,9 @@
                 <v-col cols="12">
                   <v-select
                     v-model="select"
-                    :items="items"
-                    item-text='catName'
-                    item-value="value"
+                    :items="catData"
+                    item-text='title'
+                    item-value="id"
                     :error-messages="errors"
                     label="Category"
                     dense
@@ -115,25 +115,18 @@
               >
                <input type="file" class="custom-file-input" :error-messages="errors" id="customFile"
                         ref="file" @change="handleFileObject()">
+               <div v-if="ImageUrl" id="preview">
+                  <img :src="ImageUrl" class="remove-img" />
+                </div>
+              <div v-else>
+                <img :src="getImage()" class="post-image">
+              </div>
               </ValidationProvider>
-              <!--
-                <v-col co ls="12">
-                  <v-file-input
-                    accept="image/*"
-                    type="file"
-                    ref="file"
-                    :error-messages="errors"
-                    label="Image"
-                    truncate-length="50"
-                    @change="fileSelected($event)"
-                  />
-                </v-col>
-              </ValidationProvider> -->
               <v-col cols="12">
-                <v-btn class="success mr-5" @click="onSubmit" :disabled="invalid">
-                  Click Me!
+                <v-btn class="success mr-5" @click="onSubmit">
+                  Update!
                 </v-btn>
-                <v-btn class="success" @click="clear"> clear </v-btn>
+
               </v-col>
             </v-form>
           </ValidationObserver>
@@ -179,38 +172,46 @@ export default {
     return {
       title: "",
       email: "",
-      items: [],
+      catData:'',
+      select: '',
       short_description: "",
       description: "",
-      select: [],
       image: '',
+      postId:''
     };
   },
   methods: {
     handleFileObject() {
       this.image = this.$refs.file.files[0];
+      this.ImageUrl = URL.createObjectURL(this.image);
     },
     onSubmit(e) {
       e.preventDefault();
       let formData = new FormData();
       formData.append('image', this.image);
-
       const config = {
           headers: {
               'content-type': 'multipart/form-data'
           }
       }
+      // category id is not getting when we change the categroy dropdown in this.select.id, so use below condition
+      let categoryId='';
+      if(this.select.id || this.select.id!=undefined)
+        categoryId = this.select.id;
+      else
+        categoryId = this.select;
+
       formData.append('title', this.title);
       formData.append('post_slug', this.title.split(' ').join('_').toLowerCase());
-      formData.append('category_id', this.select);
+      formData.append('category_id', categoryId);
       formData.append('shortDesc', this.short_description);
       formData.append('description', this.description);
       console.log('Submitted form data',formData);
-      axios.post('http://localhost:8000/api/post/store',
+      axios.post('http://localhost:8000/api/post/update/'+this.postId,
         formData
       )
       .then((resp) => {
-
+        console.log('Response==',resp);
         if(resp.data.status==200 && resp.data.data){
           this.$swal(
             'Good job!',
@@ -220,40 +221,36 @@ export default {
         }
       })
       this.$refs.observer.validate();
-      this.clear();
     },
-    clear() {
-      this.title = "";
-      this.short_description = "";
-      this.description = "";
-      this.select = null;
-      this.email = "";
-      this.image = null;
-      this.$refs.observer.reset();
-    },
+    getImage(){
+      return "http://127.0.0.1:8000/image/"+this.image;
+    }
   },
   created(){
+     // Check admin user logged In
+    let userLoggedIn = localStorage.getItem('user-token');
+    if(!userLoggedIn){
+      this.$router.push({ path: "/auth/login" });
+    }
+    // calling get api for showing the data of post in edit form
     axios.get('http://127.0.0.1:8000/api/post/edit/'+this.$route.params.id)
         .then((resp) => {
-          this.items = resp.data.data;
-          this.title = this.items.title;
-          this.category_id = this.items.category_id;
-          this.description = this.items.description;
-          this.short_description = this.items.shortDesc;
-          this.image = this.items.image;
-          console.log('Item',this.items);
+          let postData = resp.data.data;
+          this.postId = this.$route.params.id;
+          this.title = postData.title;
+          this.description = postData.description;
+          this.short_description = postData.shortDesc;
+          this.image = postData.image;
+          // for selecting the categroy
+          this.select = {title:postData.category.title,id:postData.category_id}
         })
     // Calling Category API for shwoing data
     axios.get('http://127.0.0.1:8000/api/category/index')
         .then((resp) => {
-          this.items = resp.data.data.data
-          for(let i=0;i < this.items.length; i++){
-            this.items[i]['catName'] = this.items[i].title;
-            this.items[i]['value'] = this.items[i].id;
-          }
+          // Assign category data, because its needs to show in the category dropdown.
+          this.catData = resp.data.data.data
         })
-
-  }
+  },
 };
 </script>
 <style scoped>
@@ -263,5 +260,18 @@ export default {
     right: 28px;
     top: 11px;
 
+}
+.post-image{
+ max-width: 198px;
+  margin: 20px 0;
+}
+
+#preview {
+  display: flex;
+}
+
+#preview img {
+  max-width: 198px;
+  margin: 20px 0;
 }
 </style>

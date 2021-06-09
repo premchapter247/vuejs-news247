@@ -207,7 +207,7 @@ export default {
       formData.append('category_id', this.select);
       formData.append('shortDesc', this.short_description);
       formData.append('description', this.description);
-      console.log('Submitted form data',formData);
+
       axios.post('http://localhost:8000/api/post/store',
         formData
       )
@@ -234,6 +234,12 @@ export default {
     },
   },
   created(){
+    // Check admin user logged In
+    let userLoggedIn = localStorage.getItem('user-token');
+    if(!userLoggedIn){
+      this.$router.push({ path: "/auth/login" });
+    }
+    // calling get api for showing the caregories
     axios.get('http://127.0.0.1:8000/api/category/index')
         .then((resp) => {
           this.items = resp.data.data.data
@@ -256,13 +262,10 @@ export default {
 
 #preview {
   display: flex;
-  /* justify-content: center; */
-  /* align-items: center; */
 }
-
 #preview img {
   max-width: 198px;
-    margin: 20px 0;
+  margin: 20px 0;
 }
 /* .remove-img{
   position: absolute;

@@ -166,6 +166,12 @@ export default {
     vimeo: "",
   }),
   created(){
+     // Check admin user logged In
+    let userLoggedIn = localStorage.getItem('user-token');
+    if(!userLoggedIn){
+      this.$router.push({ path: "/auth/login" });
+    }
+    // calling get api for showing the seting data
     axios.get('http://127.0.0.1:8000/api/setting/index')
         .then((resp) => {
           this.facebook = resp.data.data[0].facebook_url;
@@ -173,7 +179,6 @@ export default {
           this.twitter = resp.data.data[0].twitter_url;
           this.instagram = resp.data.data[0].instagram_url;
           this.vimeo = resp.data.data[0].vimo_url;
-            console.log("Items",this.items);
         })
   },
   methods: {

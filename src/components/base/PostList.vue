@@ -51,6 +51,9 @@
              <th class="text-right primary--text">
               Created
             </th>
+            <th class="text-right primary--text">
+              Action
+            </th>
           </tr>
         </thead>
         <tbody v-if="items">
@@ -61,6 +64,11 @@
                 <td>{{item.shortDesc.substring(0,30)+".." }}</td>
                 <td class="text-right">{{item.description.substring(0,50)+".." }}</td>
                 <td class="text-right">{{format_date(item.created_at)}}</td>
+                <td class="text-right">
+                <router-link :to="{ name: 'Post Edit', params: { id: item.id }}"><v-icon class="edit">mdi-square-edit-outline</v-icon></router-link>
+                  <v-icon class="delete" @click="deletePost(item.id,index)">mdi-delete-forever</v-icon>
+
+                </td>
             </tr>
         </tbody>
         <tbody v-else>
@@ -90,12 +98,45 @@ export default {
           return moment(String(value)).format('DD-MM-YYYY')
         }
       },
+      deletePost(postId,index){
+            const ApiURL = this.ApiURL;
+            const postData = this.postData;
+            this.$swal({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then(result => {
+                if (result.isConfirmed) {
+                    axios.post('http://127.0.0.1:8000/api/post/destroy/'+postId)
+                    .then(data => {
+                        if(data.status==200){
+                            this.items.splice(index, 1);
+                        }else{
+                            console.log('Something went wrong');
+                        }
+                        this.$swal(
+                            'Deleted!',
+                            'Your data has been deleted.',
+                            'success'
+                        )
+                    })
+                }
+            })
+      }
   },
   created(){
+    // Check admin user logged In
+    let userLoggedIn = localStorage.getItem('user-token');
+    if(!userLoggedIn){
+      this.$router.push({ path: "/auth/login" });
+    }
     axios.get('http://127.0.0.1:8000/api/post/index')
         .then((resp) => {
           this.items = resp.data.data.data
-            console.log( this.items);
         })
   }
 }
@@ -106,5 +147,13 @@ export default {
     position: absolute;
     top: 14px;
     right: 30px;
+}
+.delete  {
+    /* background-color: #ff0404; */
+    color: #ff0000;
+}
+.edit  {
+    /* background-color: #ff0404; */
+    color: #30bf16;
 }
 </style>
