@@ -220,6 +220,9 @@
         </div>
       </div>
     </v-container>
+    <div class="copyright-wrap text-center">
+      <p class="mb-0">&#169; Copyright 2021 Chapter247 Infotech | All Rights Reserved</p>
+    </div>
   </div>
 </template>
 
@@ -409,5 +412,14 @@ a:hover {
     font-size: 14px;
     color: #747a80;
     margin-top: 3px;
+}
+.copyright-wrap{
+  background: #232d36;
+  margin-top: 30px;
+  padding: 10px 0;
+}
+.copyright-wrap p{
+  color: #747a80;
+  font-size: 15px;
 }
 </style>

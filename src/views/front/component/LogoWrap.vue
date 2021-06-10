@@ -2,13 +2,13 @@
     <section class="logo-wrap white_bg">
         <v-container>
             <div class="d-flex justify-content-between flex-wrap">
-                <a href="" class="logo">
+                <a href="" class="logo mr-3 mb-2 mb-sm-0">
                     <v-img
                     src="https://jkcs.000webhostapp.com/news247.png"
                     ></v-img>
                 </a>
                 <a href="" class="weather-wrap d-flex ml-sm-auto">
-                    <v-icon large class="ml-5 mr-3">
+                    <v-icon large class="mr-3">
                         mdi-white-balance-sunny
                     </v-icon>
                     <div class="">
