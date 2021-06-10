@@ -85,6 +85,7 @@ a:hover {
   opacity: 0.85;
   font-size: 15px;
   line-height: 22px;
+  color: #17222b;
   margin-bottom: 0px;
 }
 
