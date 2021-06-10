@@ -4,10 +4,10 @@
             <nav class="navbar">
                 <ul class="nav-ul">
                     <li class="nav-li">
-                        <a href="" class="nav-link">Home</a>
+                        <a href="javascript:void(0)" class="nav-link">Home</a>
                     </li>
                     <li class="nav-li has-sub">
-                        <a href="" class="nav-link">Pages 
+                        <a href="" class="nav-link">Categories 
                             <v-icon small>
                                 mdi-chevron-down
                             </v-icon>
@@ -18,7 +18,32 @@
                                 <a href="" class="sub-menu-link">{{category.title}}</a>
                             </li>
                         </ul>
-                    </li>                   
+                    </li>
+                    <li class="nav-li">
+                        <a href="javascript:void(0)" class="nav-link">World</a>
+                    </li>
+                    <li class="nav-li">
+                        <a href="javascript:void(0)" class="nav-link">Sports</a>
+                    </li>
+                    <li class="nav-li">
+                        <a href="javascript:void(0)" class="nav-link">Contact</a>
+                    </li>
+                    <div class="d-flex align-items-center ml-auto">
+                        <li class="align-self-center mr-3">
+                            <a href="javascript:void(0)">
+                                <v-icon>
+                                    mdi-magnify
+                                </v-icon>
+                            </a>
+                        </li>  
+                        <li class="align-self-center">
+                            <a href="/admin/">
+                                <v-icon>
+                                    mdi-account-circle
+                                </v-icon>
+                            </a>
+                        </li>      
+                    </div>               
                 </ul>
             </nav>
         </v-container>

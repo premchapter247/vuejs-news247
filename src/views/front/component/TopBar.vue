@@ -18,8 +18,32 @@
                     <div class="top-date-wrap">
                         Thursday, June 03, 2021
                     </div>
-                    <div class="socialicons">
-
+                    <div class="socialicons-wrap">
+                        <a href="" class="d-block ml-1">
+                            <v-icon>
+                                mdi-facebook
+                            </v-icon>
+                        </a>
+                        <a href="" class="d-block ml-1">
+                            <v-icon>
+                                mdi-twitter
+                            </v-icon>
+                        </a>
+                        <a href="" class="d-block ml-1">
+                            <v-icon>
+                                mdi-instagram
+                            </v-icon>
+                        </a>
+                        <a href="" class="d-block ml-1">
+                            <v-icon>
+                                mdi-youtube
+                            </v-icon>
+                        </a>
+                        <a href="" class="d-block ml-1">
+                            <v-icon>
+                                mdi-vimeo
+                            </v-icon>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -151,5 +175,16 @@ export default {
     }
     .socialicons-wrap{
         display: flex;
+    }
+    .topbar .socialicons-wrap:before{
+        position: absolute;
+        content: "";
+        height: 15px;
+        width: 2px;
+        background: #17222b;
+        opacity: .3;
+        left: 7.5px;
+        top: 50%;
+        transform: translateY(-50%);
     }
 </style>
