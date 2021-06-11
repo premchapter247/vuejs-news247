@@ -23,8 +23,8 @@
             </div>
           </div>
           <v-card-text>
-            <ValidationObserver ref="observer" v-slot="{ invalid }">
-              <v-form @submit.prevent="onSubmit">
+            <ValidationObserver ref="observer" v-slot="{ handleSubmit }">
+              <v-form @submit.prevent="handleSubmit(onSubmit)">
                 <v-row>
                   <v-col cols="12" sm="12" md="6">
                     <ValidationProvider
@@ -97,16 +97,13 @@
                   <v-col cols="12">
                     <ValidationProvider
                       v-slot="{ errors }"
-                      name="Password"
-                      rules="required|confirmed:confirm_password"
-                      :balls="true"
+                      name="password"
+                      rules="required|customPassword"
                     >
                       <v-text-field
                         v-model="password"
                         :error-messages="errors"
                         label="Password"
-                        name="password"
-                        ref="password"
                         :counter="20"
                         :type="showPassword ? 'text' : 'password'"
                         :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -119,13 +116,13 @@
                   <v-col cols="12">
                     <ValidationProvider
                       v-slot="{ errors }"
-                      name="Confirm password"
-                      rules="required|confirmPassword"
+                      name="confirmPassword"
+                      rules="required|customConfirmPassword:@password"
                     >
                       <v-text-field
+                        label="Confirm Password"
                         v-model="password_confirmation"
                         :error-messages="errors"
-                        label="Confirm Password"
                         :counter="20"
                         :type="showConfirmPassword ? 'text' : 'password'"
                         :append-icon="
@@ -134,17 +131,14 @@
                         @click:append="
                           showConfirmPassword = !showConfirmPassword
                         "
-                      >
-                      </v-text-field>
+                        required
+                      ></v-text-field>
                     </ValidationProvider>
                   </v-col>
 
                   <v-col cols="12">
-                    <!-- <v-card-actions> -->
-                    <v-btn class="success" @click="onSubmit" :disabled="invalid"
-                      >Register</v-btn
+                    <v-btn class="success" type="submit" >Register</v-btn
                     >
-                    <!-- </v-card-actions> -->
                   </v-col>
                 </v-row>
               </v-form>
@@ -176,7 +170,7 @@ import {
 setInteractionMode("eager");
 
 var errorMessage =
-  "requires 1 of each of the following: uppercase letter, lowercase letter, number, special character (!@#$%^&*-).";
+  "requires 1 of each of the following: uppercase letter, lowercase letter, number, special character (!@#$%^&*-)";
 extend("customPassword", {
   message: (field) => `The ${field} ${errorMessage}`,
   validate: (value) => {
@@ -185,20 +179,30 @@ extend("customPassword", {
     var notTheseChars = /["'?/<>\s]/;
     var containsRequiredChars = mustContainTheseChars.test(value);
     var containsForbiddenChars = notTheseChars.test(value);
+
     if (containsRequiredChars && !containsForbiddenChars) {
       return true;
     } else {
       if (containsForbiddenChars) {
         errorMessage = `contains forbidden characters: " ' + ? / < > or space`;
       } else {
-        errorMessage = `min length 8 characters, and must include 1 uppercase letter, lowercase letter, number, special character (!@#$%^&*-).`;
+        errorMessage = `min length 8 characters, and must include 1 uppercase letter, lowercase letter, number, special character (!@#$%^&*-)`;
       }
       return false;
     }
   },
 });
 
-var errorPhoneNumber = "requires 10 digits.";
+var errorMessage_1 = "must same";
+extend("customConfirmPassword", {
+  params: ['target'],
+  message: () => `Password ${errorMessage_1}`,
+  validate(value, { target }) {
+    return value === target;
+  },
+});
+
+var errorPhoneNumber = "requires 10 digits";
 extend("customPhoneNumber", {
   message: (field) => `The ${field} ${errorPhoneNumber}`,
   validate: (value) => {
@@ -213,20 +217,6 @@ extend("customPhoneNumber", {
   },
 });
 
-var confirmedPassword = "is required.";
-extend("confirmPassword", {
-  message: (field) => `The ${field} ${confirmedPassword}`,
-  validate: (value) => {
-    // console.log(this.password + " " + value);
-    if (value === this.password) {
-      return true;
-    } else {
-      confirmedPassword = "must be same.";
-      return false;
-    }
-  },
-});
-
 extend("required", {
   ...required,
   message: "{_field_} can not be empty",
@@ -234,13 +224,12 @@ extend("required", {
 
 extend("digits", {
   ...digits,
-  message: "{_field_} needs to be {length} digits.",
+  message: "{_field_} needs to be {length} digits",
 });
 
 extend("alpha", {
   ...alpha,
-  message:
-    "{_field_} can not containt any number, space or spacial characters.",
+  message: "{_field_} can not containt any number, space or spacial characters",
 });
 
 extend("min", {
@@ -258,11 +247,14 @@ extend("email", {
   message: "Email must be valid",
 });
 
+
+
 export default {
   components: {
     ValidationProvider,
     ValidationObserver,
   },
+
   data: () => ({
     showPassword: false,
     showConfirmPassword: false,
@@ -273,6 +265,13 @@ export default {
     password: "",
     password_confirmation: "",
   }),
+
+  // computed: {
+  //   confirmPasswordRule() {
+  //     return () =>
+  //       this.password === this.password_confirmation || "Password must match";
+  //   },
+  // },
 
   methods: {
     onSubmit() {
@@ -315,7 +314,7 @@ export default {
       this.email = "";
       this.phoneNumber = null;
       this.password = "";
-      this.confirm_password = "";
+      this.password_confirmation = "";
       this.$refs.observer.reset();
     },
   },

@@ -1,23 +1,26 @@
 <template>
-  <v-app>    
+  <v-app>
     <header>
       <FrontTopBar />
       <LogoTopWrap />
       <MenuDrawer />
     </header>
     <LatestNews />
+    <FeatureNews />
+    <TranddingNews />
     <FrontFooter />
   </v-app>
 </template>
 <script>
   export default {
     name: 'Index',
-
-    components: {      
+    components: {
       FrontTopBar:  () => import('./component/TopBar'),
       LogoTopWrap:  () => import('./component/LogoWrap'),
       MenuDrawer: () => import('./component/Menu'),
       LatestNews: () => import('./component/LatestNews'),
+      FeatureNews: () => import('./component/FeatureNews'),
+      TranddingNews: () => import('./component/TranddingNews'),
       FrontFooter: () => import('./component/Footer'),
     },
 

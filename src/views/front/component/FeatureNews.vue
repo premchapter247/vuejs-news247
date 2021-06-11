@@ -1,23 +1,31 @@
 <template>
   <div>
-    <div>
-      <h2 class="widget-title">Feature News</h2>
-    </div>
-    <VueSlickCarousel :arrows="true" :dots="false" v-bind="setting" class="slick-arrow-top slick-gap-row">
-      <div v-for="list in lists" :key="list.id" class="slick-gap-col">
-        <CardImage
-          :title="list.title"
-          :src="list.image"
-          :category="list.category.title"
-          :date="list.created_at"
-          :short_desc="list.shortDesc"
-          :description="list.description"
-        ></CardImage>
+    <section class="section">
+      <div class="container">
+        <div>
+          <h2 class="widget-title">Feature News</h2>
+        </div>
+        <VueSlickCarousel
+          :arrows="true"
+          :dots="false"
+          v-bind="setting"
+          class="slick-arrow-top slick-gap-row"
+        >
+          <div v-for="list in lists" :key="list.id" class="slick-gap-col">
+            <CardImage
+              :title="list.title"
+              :src="list.image"
+              :category="list.category.title"
+              :date="list.created_at"
+              :short_desc="list.shortDesc"
+              :description="list.description"
+            ></CardImage>
+          </div>
+        </VueSlickCarousel>
+        <div class="border_black"></div>
+        <div class="space-30"></div>
       </div>
-
-    </VueSlickCarousel>
-    <div class="border_black"></div>
-    <div class="space-30"></div>
+    </section>
   </div>
 </template>
 
@@ -79,6 +87,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
