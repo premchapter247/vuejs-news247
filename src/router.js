@@ -71,11 +71,11 @@ export default new Router({
         //   component: () => import('./components/base/Setting'),
         // },
         // Registration Form
-        // {
-          //   name: 'Registration Form',
-        //   path: 'registration',
-        //   component: () => import('./components/base/Registration'),
-        // },
+        {
+          name: 'Registration Form',
+          path: 'registration',
+          component: () => import('./components/base/Registration'),
+        },
       ],
     },
     {

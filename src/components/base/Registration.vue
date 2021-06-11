@@ -98,15 +98,12 @@
                     <ValidationProvider
                       v-slot="{ errors }"
                       name="Password"
-                      rules="required|confirmed:confirm_password"
-                      :balls="true"
+                      rules="required|customPassword"
                     >
                       <v-text-field
                         v-model="password"
                         :error-messages="errors"
                         label="Password"
-                        name="password"
-                        ref="password"
                         :counter="20"
                         :type="showPassword ? 'text' : 'password'"
                         :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -120,12 +117,13 @@
                     <ValidationProvider
                       v-slot="{ errors }"
                       name="Confirm password"
-                      rules="required|confirmPassword"
+                      rules="required|customConfirmPassword"
                     >
                       <v-text-field
+                        label="Confirm Password"
                         v-model="password_confirmation"
                         :error-messages="errors"
-                        label="Confirm Password"
+                        :rules="[confirm_password_rule]"
                         :counter="20"
                         :type="showConfirmPassword ? 'text' : 'password'"
                         :append-icon="
@@ -134,17 +132,15 @@
                         @click:append="
                           showConfirmPassword = !showConfirmPassword
                         "
-                      >
-                      </v-text-field>
+                        required
+                      ></v-text-field>
                     </ValidationProvider>
                   </v-col>
 
                   <v-col cols="12">
-                    <!-- <v-card-actions> -->
                     <v-btn class="success" @click="onSubmit" :disabled="invalid"
                       >Register</v-btn
                     >
-                    <!-- </v-card-actions> -->
                   </v-col>
                 </v-row>
               </v-form>
@@ -176,7 +172,7 @@ import {
 setInteractionMode("eager");
 
 var errorMessage =
-  "requires 1 of each of the following: uppercase letter, lowercase letter, number, special character (!@#$%^&*-).";
+  "requires 1 of each of the following: uppercase letter, lowercase letter, number, special character (!@#$%^&*-)";
 extend("customPassword", {
   message: (field) => `The ${field} ${errorMessage}`,
   validate: (value) => {
@@ -185,20 +181,56 @@ extend("customPassword", {
     var notTheseChars = /["'?/<>\s]/;
     var containsRequiredChars = mustContainTheseChars.test(value);
     var containsForbiddenChars = notTheseChars.test(value);
+
     if (containsRequiredChars && !containsForbiddenChars) {
       return true;
     } else {
       if (containsForbiddenChars) {
         errorMessage = `contains forbidden characters: " ' + ? / < > or space`;
       } else {
-        errorMessage = `min length 8 characters, and must include 1 uppercase letter, lowercase letter, number, special character (!@#$%^&*-).`;
+        errorMessage = `min length 8 characters, and must include 1 uppercase letter, lowercase letter, number, special character (!@#$%^&*-)`;
       }
       return false;
     }
   },
 });
 
-var errorPhoneNumber = "requires 10 digits.";
+var errorMessage_1 = "must same";
+extend("customConfirmPassword", {
+  message: () => `Password ${errorMessage_1}`,
+  validate: (value) => {
+    var mustContainTheseChars =
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*-]).*$/;
+    var notTheseChars_1 = /["'?/<>\s]/;
+    var containsRequiredChars_1 = mustContainTheseChars.test(value);
+    var containsForbiddenChars_1 = notTheseChars_1.test(value);
+    if (containsRequiredChars_1 && !containsForbiddenChars_1) {
+      return true;
+    } else {
+      if (containsForbiddenChars) {
+        errorMessage_1 = `must same`;
+      } else {
+        errorMessage_1 = `must same`;
+      }
+      return false;
+    }
+  },
+});
+
+var confirmedPassword = "is required";
+extend("confirmPassword", {
+  message: (field) => `The ${field} ${confirmedPassword}`,
+  validate: (value) => {
+    if (value === this.password) {
+      return true;
+    } else {
+      confirmedPassword = "must same";
+      return false;
+    }
+  },
+});
+
+var errorPhoneNumber = "requires 10 digits";
 extend("customPhoneNumber", {
   message: (field) => `The ${field} ${errorPhoneNumber}`,
   validate: (value) => {
@@ -213,20 +245,6 @@ extend("customPhoneNumber", {
   },
 });
 
-var confirmedPassword = "is required.";
-extend("confirmPassword", {
-  message: (field) => `The ${field} ${confirmedPassword}`,
-  validate: (value) => {
-    // console.log(this.password + " " + value);
-    if (value === this.password) {
-      return true;
-    } else {
-      confirmedPassword = "must be same.";
-      return false;
-    }
-  },
-});
-
 extend("required", {
   ...required,
   message: "{_field_} can not be empty",
@@ -234,13 +252,12 @@ extend("required", {
 
 extend("digits", {
   ...digits,
-  message: "{_field_} needs to be {length} digits.",
+  message: "{_field_} needs to be {length} digits",
 });
 
 extend("alpha", {
   ...alpha,
-  message:
-    "{_field_} can not containt any number, space or spacial characters.",
+  message: "{_field_} can not containt any number, space or spacial characters",
 });
 
 extend("min", {
@@ -263,6 +280,7 @@ export default {
     ValidationProvider,
     ValidationObserver,
   },
+
   data: () => ({
     showPassword: false,
     showConfirmPassword: false,
@@ -273,6 +291,13 @@ export default {
     password: "",
     password_confirmation: "",
   }),
+
+  computed: {
+    confirm_password_rule() {
+      return () =>
+        this.password === this.password_confirmation || "Password must match";
+    },
+  },
 
   methods: {
     onSubmit() {
@@ -315,7 +340,7 @@ export default {
       this.email = "";
       this.phoneNumber = null;
       this.password = "";
-      this.confirm_password = "";
+      this.password_confirmation = "";
       this.$refs.observer.reset();
     },
   },
