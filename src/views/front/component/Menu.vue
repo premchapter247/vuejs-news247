@@ -63,7 +63,7 @@ export default {
       axios.get('http://127.0.0.1:8000/api/categories')
         .then((resp) => {
           this.categorys = resp.data.data
-          console.warn(resp.data.data)
+          console.log(resp.data.data)
         })
     },
 }

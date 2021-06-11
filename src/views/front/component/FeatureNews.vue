@@ -73,7 +73,7 @@ export default {
       .post("http://127.0.0.1:8000/api/post/list", { start: 0, total: 10 })
       .then((resp) => {
         this.lists = resp.data.data;
-        console.warn(resp.data.data);
+        console.log(resp.data.data);
       });
   },
 };

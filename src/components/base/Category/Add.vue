@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     submit() {
-      console.warn(this.title);
+      console.log(this.title);
       const token = localStorage.getItem('user-token') || ''
       axios
         .post(
@@ -75,7 +75,7 @@ export default {
           { headers: { Authorization: "Bearer" + token } }
         )
         .then((response) => {
-          // console.warn(response.data)
+          // console.log(response.data)
           if (response.data.status === 200) {
             this.$router.push({ path: "/admin/category/list" });
           }

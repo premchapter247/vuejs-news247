@@ -55,7 +55,7 @@
       axios.get('http://127.0.0.1:8000/api/category/index')
         .then((resp) => {
           this.list = resp.data.data.data
-          console.warn(resp.data.data.data)
+          console.log(resp.data.data.data)
         })
     },
   }

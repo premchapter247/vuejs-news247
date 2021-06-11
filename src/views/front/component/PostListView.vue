@@ -109,35 +109,37 @@ export default {
   data() {
     return {
       moment: moment,
-      list: "undefined",
-      relateds: "undefined",
-      populars: "undefined",
+      list: [],
+      relateds: [],
+      populars: [],
       active_1: true,
       active_2: false,
       active_3: false,
     };
   },
   mounted() {
+    console.log(this.active_1, 'active_1');
     axios
-      .post("http://127.0.0.1:8000/api/post/list", { start: 0, total: 5 })
+      .post("http://127.0.0.1:8000/api/post/list", { start: 10, total: 5 })
       .then((resp) => {
         this.lists = resp.data.data;
-        console.warn(resp.data.data);
+        console.log(resp.data.data);
       });
-
+    
     axios
       .post("http://127.0.0.1:8000/api/post/list", { start: 5, total: 5 })
       .then((resp) => {
         this.relateds = resp.data.data;
-        console.warn(resp.data.data);
+        console.log(resp.data.data);
       });
 
     axios
       .post("http://127.0.0.1:8000/api/post/list", { start: 0, total: 5 })
       .then((resp) => {
         this.populars = resp.data.data;
-        console.warn(resp.data.data);
+        console.log(resp.data.data);
       });
+      
   },
   methods: {
     first() {

@@ -70,7 +70,7 @@ export default {
       axios.get('http://127.0.0.1:8000/api/tranding-list')
         .then((resp) => {
           this.trandinglists = resp.data.data
-          console.warn(resp.data.data)
+          console.log(resp.data.data)
         })
     },
 }

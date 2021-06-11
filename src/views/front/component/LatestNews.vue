@@ -139,13 +139,13 @@ export default {
       .post("http://127.0.0.1:8000/api/post/list", { start: 0, total: 10 })
       .then((resp) => {
         this.list = resp.data.data;
-        console.warn(resp.data.data);
+        console.log(resp.data.data);
       });
     axios
       .post("http://127.0.0.1:8000/api/post/list", { start: 6, total: 6 })
       .then((resp) => {
         this.topposts = resp.data.data;
-        console.warn(resp.data.data);
+        console.log(resp.data.data);
       });
   },
 };
