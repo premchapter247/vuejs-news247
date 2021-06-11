@@ -23,8 +23,8 @@
             </div>
           </div>
           <v-card-text>
-            <ValidationObserver ref="observer" v-slot="{ invalid }">
-              <v-form @submit.prevent="onSubmit">
+            <ValidationObserver ref="observer" v-slot="{ handleSubmit }">
+              <v-form @submit.prevent="handleSubmit(onSubmit)">
                 <v-row>
                   <v-col cols="12" sm="12" md="6">
                     <ValidationProvider
@@ -97,7 +97,7 @@
                   <v-col cols="12">
                     <ValidationProvider
                       v-slot="{ errors }"
-                      name="Password"
+                      name="password"
                       rules="required|customPassword"
                     >
                       <v-text-field
@@ -116,14 +116,13 @@
                   <v-col cols="12">
                     <ValidationProvider
                       v-slot="{ errors }"
-                      name="Confirm password"
-                      rules="required|customConfirmPassword"
+                      name="confirmPassword"
+                      rules="required|customConfirmPassword:@password"
                     >
                       <v-text-field
                         label="Confirm Password"
                         v-model="password_confirmation"
                         :error-messages="errors"
-                        :rules="[confirm_password_rule]"
                         :counter="20"
                         :type="showConfirmPassword ? 'text' : 'password'"
                         :append-icon="
@@ -138,8 +137,7 @@
                   </v-col>
 
                   <v-col cols="12">
-                    <v-btn class="success" @click="onSubmit" :disabled="invalid"
-                      >Register</v-btn
+                    <v-btn class="success" type="submit" >Register</v-btn
                     >
                   </v-col>
                 </v-row>
@@ -197,36 +195,10 @@ extend("customPassword", {
 
 var errorMessage_1 = "must same";
 extend("customConfirmPassword", {
+  params: ['target'],
   message: () => `Password ${errorMessage_1}`,
-  validate: (value) => {
-    var mustContainTheseChars =
-      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*-]).*$/;
-    var notTheseChars_1 = /["'?/<>\s]/;
-    var containsRequiredChars_1 = mustContainTheseChars.test(value);
-    var containsForbiddenChars_1 = notTheseChars_1.test(value);
-    if (containsRequiredChars_1 && !containsForbiddenChars_1) {
-      return true;
-    } else {
-      if (containsForbiddenChars) {
-        errorMessage_1 = `must same`;
-      } else {
-        errorMessage_1 = `must same`;
-      }
-      return false;
-    }
-  },
-});
-
-var confirmedPassword = "is required";
-extend("confirmPassword", {
-  message: (field) => `The ${field} ${confirmedPassword}`,
-  validate: (value) => {
-    if (value === this.password) {
-      return true;
-    } else {
-      confirmedPassword = "must same";
-      return false;
-    }
+  validate(value, { target }) {
+    return value === target;
   },
 });
 
@@ -275,6 +247,8 @@ extend("email", {
   message: "Email must be valid",
 });
 
+
+
 export default {
   components: {
     ValidationProvider,
@@ -292,12 +266,12 @@ export default {
     password_confirmation: "",
   }),
 
-  computed: {
-    confirm_password_rule() {
-      return () =>
-        this.password === this.password_confirmation || "Password must match";
-    },
-  },
+  // computed: {
+  //   confirmPasswordRule() {
+  //     return () =>
+  //       this.password === this.password_confirmation || "Password must match";
+  //   },
+  // },
 
   methods: {
     onSubmit() {
